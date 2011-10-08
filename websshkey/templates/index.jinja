@@ -1,0 +1,103 @@
+<html>
+
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <title id='title'>Git - Key Config</title>
+
+  <!-- css -->
+  <link rel='stylesheet' href='{{ url_for('static', filename="css/reset.css") }}'>
+  <link rel='stylesheet' href='{{ url_for('static', filename="css/custom-theme/jquery-ui-1.8.16.custom.css") }}'>
+  <link rel='stylesheet' href='{{ url_for('static', filename="css/style.css") }}'>
+
+  <!-- js -->
+  <script type='text/javascript' src='{{ url_for('static', filename="js/jquery-1.6.2.min.js") }}'></script>
+  <script type='text/javascript' src='{{ url_for('static', filename="js/jquery-ui-1.8.16.custom.min.js") }}'></script>
+  <script type='text/javascript' src='{{ url_for('static', filename="js/jquery.loading.1.6.4.min.js") }}'></script>
+  <script type='text/javascript' src='{{ url_for('static', filename="js/code.js") }}'></script>
+
+  <script type='text/javascript'>
+  </script>
+</head>
+
+<body>
+  <div id='loading'></div>
+
+  <div class='content'>
+  <div class='centered-within'>
+    <p>~ <span>{{ remote_user }}</span> ~</p>
+  </div>
+
+  <div class='centered'>
+
+    <div id='oneline-error'>
+      <img src='{{ url_for('static', filename="images/sweetieplus/with-shadows/warning-16.png") }}'></img>
+      <span></span>
+    </div>
+
+    {% if enable_identities %}
+    <div id='git-identity'>
+      <p> Type in your identity: </p>
+      <p> <input type='text' title='John Doe <john.doe@email>' value='{{ git_identity }}'</input> </p>
+      <button class='btn'> Update </button>
+    </div>
+    {% endif %}
+
+    <div class='pubkey'>
+      <p> Type in your public key: </p>
+      <p> <textarea> </textarea> </p>
+      <button class='btn' id='add-key'> Add </button>
+      <button class='btn' id='load-key'> Load </button>
+      <form action='add' method='post'></form>
+    </div>
+
+    <!-- todo: use html5 data attributes -->
+    {% for user, machine, key in sshkeys %}
+    <div class='drop-key' id='drop-key-{{ machine }}'>
+      {% if loop.first %}
+      <p> Your current public keys: </p>
+      {% endif %}
+      <p> <textarea  readonly='true'>{{ key }}</textarea> </p>
+      <button class='btn'> Drop </button>
+    </div>
+    {% endfor %}
+
+    <div> 
+      <span> Help </span>
+      <div id='faq'> 
+        <h3><a href='#'>How do I generate a ssh keypair?</a></h3>
+        <div>
+          <div>
+            <span> Linux/Unix </span>
+            <hr/>
+            <pre> To be defined </pre>
+          </div>
+
+          <div>
+            <span> Windows </span>
+            <hr/>
+            <pre> To be defined </pre>
+          </div>
+
+          <div>
+            <span> Notes </span>
+            <hr/>
+            <pre> To be defined </pre>
+            <!--ul>
+                <li> To be defined </li>
+            </ul-->
+          </div>
+        </div>
+
+        <h3><a href='#'>How do I find my ssh public key?</a></h3>
+        <pre>To be defined</pre>
+
+        <h3><a href='#'>What is a GIT identity?</a></h3>
+        <pre>To be defined</pre>
+      </div>
+    </div>
+    
+  </div>
+  </div>
+</body>
+
+</html>

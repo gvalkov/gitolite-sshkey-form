@@ -1,0 +1,156 @@
+body {
+    text-align:center;
+    font-family: "Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
+    font-size: 11px;
+    color: #111;
+}
+
+pre {
+    /* font-family list taken from stackoverflow */
+    font-family: Consolas, Menlo , Monaco , Lucida Console, Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+    overflow: auto;
+    padding: 5px;
+    width: auto;
+}
+
+div {
+    padding-top: 15px;
+}
+
+input, textarea {
+    -moz-box-sizing: border-box;
+    height: 150px;
+    max-height: 16px;
+    min-height: 150px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+
+    /* style and background taken from dojo's nihilo theme */
+    background: url("../images/validationInputBg.png") repeat-x scroll left top #FFFFFF;
+    border: 1px solid #D3D3D3;
+
+    /* font-family list taken from stackoverflow */
+    font-family: Consolas, Menlo , Monaco , Lucida Console, Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+    font-size: 1.1em;
+}
+
+button.btn { 
+    /* style and background taken from dojo's nihilo theme */
+    background: url("../images/buttonEnabled.png") repeat-x scroll left top #FFFFFF;
+    border-top: 0px;
+}
+
+.centered {
+    width:500px;
+    margin:0px auto;
+    text-align:left;
+    padding:15px;
+    border:0px solid #333;
+}
+
+.content {
+    padding: 50px 0px;
+    line-height: 22px;
+}
+
+/* jQuery icons */
+.ui-button .ui-icon.icon-file, 
+.ui-button .ui-icon.icon-sync, 
+.ui-button .ui-icon.icon-delete,
+.ui-button .ui-icon.icon-key {
+    /* Sprite and positions taken from dojo's nihilo theme */
+    background-image: url("../images/commonIconsObjActEnabled.png");
+    height: 16px;
+    width: 16px;
+}
+
+.ui-icon.icon-delete { background-position: -80px 50%;  }
+.ui-icon.icon-sync   { background-position: -96px 50%;  }
+.ui-icon.icon-key    { background-position: -384px 50%; }
+.ui-icon.icon-file   { background-position: -352px 50%; }
+
+div#loading {
+    text-align: left;
+    height: auto;
+}
+
+div#loading div {
+    padding: 2px;
+}
+
+div#git-identity input {
+    max-height: 1.6em;
+    min-height: 1.6em;
+}
+
+div#oneline-error {
+    font-weight: bold;
+    color: #d46464;
+    /*text-decoration: underline;*/
+    padding: 0;
+    text-align:center;
+    display: none;
+}
+
+div#oneline-error img {
+    vertical-align: middle;
+    padding-bottom: 2px;
+}
+
+.centered-within {
+    text-align: center;
+    font-style: bold;
+    padding-bottom:10px;
+}
+
+.text-area-inactive {
+    color: #a1a1a1; 
+    font-style: italic; 
+}
+
+/*Customize the look of the faq accorion */
+#faq > .ui-state-default,.ui-state-active,.ui-widget-content {
+    border: 0px;
+}
+
+#faq > .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    color: #243C5F;
+}
+
+#faq > .ui-widget {
+    font-size: 12px;
+}
+
+
+#faq ul li,
+#faq p {
+    padding-top: 5px;
+}
+
+#faq ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+#faq ul li:before {
+    content: "\00BB \0020";
+    color: #d46464;
+}
+
+
+/* jquery.loading style */
+
+.loading {
+    background: #D3D3D3;
+    padding-left: 3px;
+    border: 2px;
+}
+
+.loading-masked { overflow: hidden; }
+.loading-error {
+    color: #FFF;
+    background: red;
+}

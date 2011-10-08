@@ -1,0 +1,1 @@
+recursive-include websshkey *.png *.jpg *.gif *.txt *.css  *.js *.html *.xml *.jinja *.sql
