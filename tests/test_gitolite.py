@@ -49,7 +49,7 @@ def addkey_existing(gitolite, aliases):
     alias = aliases[0]
 
     keys = list(gitolite.listkeys(alias, namesonly=True))
-    next_key = max([i[1] for i in keys]) + 1
+    next_key = int(max([i[1] for i in keys])) + 1
 
     gitolite.addkey(alias, 'asdf')
 

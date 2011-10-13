@@ -5,9 +5,9 @@ import os, shutil
 import random, string
 
 from mock import Mock
-from attest import Tests
+from attest import Tests, raises
 
-from tempfile import mkdtemp
+from tempfile import mktemp, mkdtemp, NamedTemporaryFile
 from subprocess import Popen, check_call, call
 from os.path import join as pjoin, isfile, exists
 
@@ -15,7 +15,6 @@ from websshkey.gitadmin import GitAdmin
 from websshkey.gitolite import Gitolite
 
 devnull = open(os.devnull, 'w')
-
 
 def createGitRepo():
     workdir = mkdtemp()
@@ -25,6 +24,14 @@ def createGitRepo():
 
     return workdir
 
+def sshkeyGen(path, real=True, bits=768):
+    if real:
+        cmd = ('ssh-keygen', '-q', '-b', str(bits), '-N', '', '-f', path)
+        check_call(cmd, stdout=devnull, stderr=devnull)
+    else:
+        s = random.sample(string.letters, 50)
+        with open(path + '.pub', 'w') as fh:
+            fh.write(''.join(s))
 
 def createGitoliteGitRepo(users=2, keysperuser=2, realkeys=False):
     ''' Create a semi-realistic gitolite repo for testing purposes '''
@@ -42,14 +49,7 @@ def createGitoliteGitRepo(users=2, keysperuser=2, realkeys=False):
     for alias in aliases:
         for n in range(0, keysperuser):
             p = pjoin(keydir, '%s@%s' % (alias, n))
-
-            if realkeys:
-                cmd = ('ssh-keygen', '-b', '768', '-N', '', '-q', '-f', p)
-                check_call(cmd, stdout=devnull, stderr=devnull)
-            else:
-                s = random.sample(string.letters, 50)
-                with open(p + '.pub', 'w') as fh:
-                    fh.write(''.join(s))
+            sshkeyGen(p, realkeys)
 
     for f in os.listdir(keydir):
         if not f.endswith('.pub'):
