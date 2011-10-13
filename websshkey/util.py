@@ -3,6 +3,7 @@
 
 import os
 
+from base64     import urlsafe_b64encode, urlsafe_b64decode
 from types      import IntType, StringType
 from itertools  import tee, izip
 from subprocess import call
@@ -22,12 +23,13 @@ def onlyint(data):
     if type(data) == StringType:
         if data.isdigit(): return int(data)
 
-
 def nextinseq(seq, start=0):
     ''' [0, 1, 3] -> 2
         [0, 'asdf', '3', 5] -> 1
     '''
+
     seq = map(onlyint, seq)
+    seq = filter(lambda x: x != None, seq)
 
     if not seq: return start
     if len(seq) == 1: return seq[0] + 1
@@ -49,3 +51,8 @@ def iskeyvalid(key):
         ret = call(cmd, stdout=devnull, stderr=devnull)
 
     return ret == 0
+
+def listkeys64(keys):
+    for user, machine, key in keys:
+        yield user, urlsafe_b64encode(machine), key
+

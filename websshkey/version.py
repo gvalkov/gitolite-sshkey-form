@@ -1,4 +1,8 @@
-''' Version information constants and auxiliary functions.
+#!/usr/bin/env python
+# encoding: utf-8
+
+'''
+Version information constants and auxiliary functions.
 '''
 
 

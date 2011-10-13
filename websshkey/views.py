@@ -7,7 +7,7 @@ import os, sys
 from flask import request
 
 from websshkey.app  import app
-from websshkey.util import iskeyvalid
+from websshkey.util import iskeyvalid, listkeys64, urlsafe_b64decode
 from websshkey.gitadmin import GitAdmin
 from websshkey.gitolite import Gitolite
 from websshkey.identities import Identities
@@ -51,6 +51,9 @@ def index():
     remote_user = request.environ['REMOTE_USER']
     keys = flask.g.gitolite.listkeys(remote_user)
 
+    # base64 encode the machine name
+    keys = listkeys64(keys)
+
     env = {
         'remote_user' : remote_user,
         'sshkeys'     : list(keys),
@@ -58,6 +61,9 @@ def index():
     }
 
     if app.config['ENABLE_IDENTITIES']:
+        # this is where you could set the user's identity to a reasonable
+        # default (from ldap for example)
+
         identity = flask.g.identities.get(remote_user)
         env['git_identity'] = identity and identity or ''
 
@@ -85,6 +91,9 @@ def dropkey(machine):
 
     if not machine:
         return flask.Response('Missing key name', status=400)
+
+    # base64 decode the machine name (must not be unicode)
+    machine = urlsafe_b64decode(str(machine))
 
     flask.g.gitolite.dropkey(remote_user, machine)
     return flask.Response(status=200)
@@ -118,3 +127,4 @@ def getidentity(alias):
         return flask.Response('Identity for user %s not found' % alias, status=400)
 
     return flask.Response(identity, status=200)
+

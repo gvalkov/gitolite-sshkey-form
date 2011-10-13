@@ -43,7 +43,7 @@ $(function () {
 
         $(value).click(function () {
             var parent = this.parentNode;
-            var keynum = parent.id.replace('drop-key-', '');
+            var keynum = $(parent).data('machine');
 
             $.ajax({
                 url   : location.pathname + 'drop/' + keynum,

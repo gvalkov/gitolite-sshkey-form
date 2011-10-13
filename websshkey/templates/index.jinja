@@ -50,9 +50,8 @@
       <form action='add' method='post'></form>
     </div>
 
-    <!-- todo: use html5 data attributes -->
     {% for user, machine, key in sshkeys %}
-    <div class='drop-key' id='drop-key-{{ machine }}'>
+    <div class='drop-key' data-machine='{{ machine }}'>
       {% if loop.first %}
       <p> Your current public keys: </p>
       {% endif %}
