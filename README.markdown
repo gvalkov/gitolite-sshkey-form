@@ -45,8 +45,8 @@ attempting to push. In pseudo-code:
             if identity is not committer: complain()
 
 If you wish to disable this functionality, set `ENABLE_IDENTITIES` to `False`
-in the configuration file. This would remove the set-identity, get-identity
-views, as well as the identity text input from the index view.
+in the configuration file. This would remove the `/set-identity`, `/get-identity`
+paths, as well as the identity text input from the index view.
 
 
 Setup
@@ -113,8 +113,9 @@ Setup - Simple Authentication
         $ mkdir update.secondary.d
         $ sudo -u gitolite gl-setup
 
-Gitolite will add symbolic links to `update.secondary.d` and `update.secondary`
-in the hooks directory of every repository that it oversees.
+    Gitolite will add symbolic links to `update.secondary.d` and
+    `update.secondary` in the hooks directory of every repository that it
+    oversees.
 
 2. Copy update.authentication script to ./update.secondary.d
 
@@ -124,6 +125,43 @@ in the hooks directory of every repository that it oversees.
         $ editor ./update.secondary.d/update.authentication.sh
 
 
+Development
+===========
+
+__Files of potential interest:__
+
+ * [views.py][views] - all functionality ends up being used here
+ * [code.js][codejs] - javascript (use sparingly)
+ * [style.css][css] - main stylesheet
+
+__Random notes:__
+
+ * Use the [test-run.py][testrun] script to run locally (it also set a
+   `REMOTE\_USER` for you, since nearly all handlers rely on that being set)
+
+ * The styling of the app is intertwined between the main [stylesheet][css] and
+   the [jquery-ui css][cssjq]. 
+
+__Tests:__
+ 
+For testing, web-sshkey-helper uses the excellent [attest][attest] framework.
+Tests are organized as modules under `/tests`. To run all tests, as well as
+resolve any testing dependencies, run:
+        
+        $ python setup.py test  # or
+        $ python tests/__init__.py
+
+To run individual tests:
+
+        $ python tests/test_$name.py
+ 
 [gitolite]:      http://github.com/sitaramc/gitolite
 [gitolite-auth]: http://sitaramc.github.com/gitolite/doc/authentication-vs-authorisation.html
-[update]:        http://github.com/gvalkov/web-sshkey-helper/etc/update.authenticate.sh
+[update]:        http://github.com/gvalkov/web-sshkey-helper/blob/master/etc/update.authenticate.sh
+[views]:         http://github.com/gvalkov/web-sshkey-helper/blob/master/websshkey/views.py
+[codejs]:        http://github.com/gvalkov/web-sshkey-helper/blob/master/websshkey/static/js/code.js
+[vendorjs]:      http://github.com/gvalkov/web-sshkey-helper/blob/master/websshkey/static/js/code.js
+[css]:           http://github.com/gvalkov/web-sshkey-helper/blob/master/websshkey/static/css/style.css
+[cssjq]:         http://github.com/gvalkov/web-sshkey-helper/blob/master/websshkey/static/css/custom-theme/jquery-ui-1.8.16.custom.css
+[testrun]:       http://github.com/gvalkov/web-sshkey-helper/blob/master/websshkey/test-run.py
+[attest]:        http://github.com/dag/attest
