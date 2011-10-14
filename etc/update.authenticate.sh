@@ -15,7 +15,26 @@ declare -r refname=$1
 declare -r oldrev=$2
 declare -r newrev=$3
 
+declare -r nullrev="0000000000000000000000000000000000000000"
+
+
+# determine commit action
+if [[ "${oldrev}" == "${nullrev}" ]]; then ctype='create'
+else
+    if [[ "${newrev}" == "${nullrev}" ]];
+        then ctype='delete'
+        else ctype='update'
+    fi
+fi
+
+
+# branch creation/deletion best be handled elsewhere 
+[[ "${ctype}" != 'update' ]] && exit 0
+
+
+# fetch git identity from web-sshkey-helper
 git_identity=$(curl -sf "${get_identity_url}/${GL_USER}")
+
 
 if [[ $? -ne 0 ]]; then
     if [[ $flunk_on_curl_error -eq 0 ]]; then
@@ -25,6 +44,7 @@ if [[ $? -ne 0 ]]; then
     fi
 fi
 
+
 function logError () {
     exec >&2
     echo "unauthenticated commit by ${GL_USER} ... abort" | tee -a ${faillog}
@@ -33,6 +53,7 @@ function logError () {
     echo "  culprit:   '${3}'" | tee -a ${faillog}
     [[ -f ${faillog} ]] && echo -e "  date:      '$(date)'\n" >> ${faillog}
 }
+
 
 for rev in $(git rev-list ${oldrev}..${newrev}); do
     committer=$(
