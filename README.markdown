@@ -137,7 +137,7 @@ __Files of potential interest:__
 __Random notes:__
 
  * Use the [test-run.py][testrun] script to run locally (it also set a
-   `REMOTE\_USER` for you, since nearly all handlers rely on that being set)
+   `REMOTE_USER` for you, since nearly all handlers rely on that being set)
 
  * The styling of the app is intertwined between the main [stylesheet][css] and
    the [jquery-ui css][cssjq]. 
