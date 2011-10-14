@@ -54,5 +54,6 @@ def iskeyvalid(key):
 
 def listkeys64(keys):
     for user, machine, key in keys:
-        yield user, urlsafe_b64encode(machine), key
+        # joe.pub -> machine is None (which is lame)
+        yield user, urlsafe_b64encode(str(machine)), key
 
