@@ -1,7 +1,7 @@
 #!/bin/bash 
 # set -u # is usually a good idea, but I got lazy with $faillog
 
-# url to the web-sshkey-helper get-identity view
+# url to the gitolite-sshkey-form get-identity view
 declare -r get_identity_url='http://<change me>/get-identity/'
 
 # 1: will abort if the above url is unreachable

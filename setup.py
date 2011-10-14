@@ -31,10 +31,10 @@ kw = {
 
     'license'              : 'New BSD License',
 
-    'keywords'             : 'gitolite gitosis sshkey web.py',
+    'keywords'             : 'gitolite sshkey',
     'classifiers'          : classifiers,
 
-    'url'                  : 'https://github.com/gvalkov/web-sshkey-helper',
+    'url'                  : 'https://github.com/gvalkov/gitolite-sshkey-form',
 
     'packages'             : find_packages(exclude=['tests']),
     'install_requires'     : requires,
