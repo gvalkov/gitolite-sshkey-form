@@ -48,6 +48,13 @@ If you wish to disable this functionality, set `ENABLE_IDENTITIES` to `False`
 in the configuration file. This would remove the `/set-identity`, `/get-identity`
 paths, as well as the identity text input from the index view.
 
+Since gitolite-sshkey-form needs a `REMOTE_USER` to be set by your application
+server, you most likely already have a better service against which to
+authenticate commits (centralized authentication). The described functionality
+might be useful if your autentication backend does not contain all the
+necessary information (full name, email) or in cases where it is easier to
+manage your git identity seperately.
+
 
 Setup
 =====
@@ -93,11 +100,18 @@ Setup
 6. Configure gitolite-sshkey-form
 
         $ cp src/etc/config.py ./config.py
+        $ cp src/etc/websshkey.wsgi ./websshkey.wsgi
+
         $ editor config.py 
+
+        # set the path to the config file:
+        # environ['WEBSSHKEY_HELPER_CONFIG'] = '/var/lib/gitolite-sshkey-form/config.py'
+        $ editor websshkey.wsgi
 
 7. Configure application server (apache + mod\_wsgi)
 
-        TBD
+    The [httpd.conf][httpd] file contains an example virtual host configuration
+    running with mod_wsgi.
 
 
 Setup - Simple Authentication
@@ -158,6 +172,7 @@ To run individual tests:
 [gitolite]:      http://github.com/sitaramc/gitolite
 [gitolite-auth]: http://sitaramc.github.com/gitolite/doc/authentication-vs-authorisation.html
 [update]:        http://github.com/gvalkov/gitolite-sshkey-form/blob/master/etc/update.authenticate.sh
+[httpd]:         http://github.com/gvalkov/gitolite-sshkey-form/blob/master/etc/httpd.conf
 [views]:         http://github.com/gvalkov/gitolite-sshkey-form/blob/master/websshkey/views.py
 [codejs]:        http://github.com/gvalkov/gitolite-sshkey-form/blob/master/websshkey/static/js/code.js
 [vendorjs]:      http://github.com/gvalkov/gitolite-sshkey-form/blob/master/websshkey/static/js/code.js
