@@ -16,14 +16,14 @@ Screenshots
 ===========
 
 <div style='float:left'>
-<a href='https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/1.png'>
-<img align='top' src='https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/1.th.png' alt='Without any public keys' /> 
+<a href='https://github.com/gvalkov/screenshots/raw/master/full/websshkey-01.png'>
+<img align='top' src='https://github.com/gvalkov/screenshots/raw/master/thumb/websshkey-01.png' alt='Without any public keys' />
 </a>
 </div>
 
 <div style='float:left;'>
-<a href='https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/2.png'>
-<img align='top' src='https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/2.th.png' alt='With two public keys' /> 
+<a href='https://github.com/gvalkov/screenshots/raw/master/full/websshkey-02.png'>
+<img align='top' src='https://github.com/gvalkov/screenshots/raw/master/thumb/websshkey-02.png' alt='With two public keys' />
 </a>
 </div>
 
