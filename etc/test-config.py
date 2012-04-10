@@ -11,6 +11,6 @@ AUTHOR_EMAIL = '<nobody@localhost>'
 # path to gitolite-admin working copy
 WORKDIR      = '/tmp/websshkey-workdir'
 
-# enable/disable the identities functionality
+# enable/disable the identity functionality
 ENABLE_IDENTITIES = True
 IDENTITIES_DB = '/tmp/websshkey-identities.sql'

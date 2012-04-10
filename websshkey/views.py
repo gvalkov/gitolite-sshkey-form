@@ -28,7 +28,9 @@ def repoconnect():
 
 @app.before_first_request
 def configure():
-    app.config.from_envvar('WEBSSHKEY_HELPER_CONFIG')
+    # if we're running from test-run.py we would have already set things up
+    if not (app.config['TESTING'] and app.config['ADMIN_REPO']):
+        app.config.from_envvar('WEBSSHKEY_HELPER_CONFIG')
 
 
 @app.before_request
