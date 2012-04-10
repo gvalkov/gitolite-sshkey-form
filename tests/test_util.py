@@ -4,10 +4,8 @@
 from websshkey import util
 from tests.util import *
 
-utilt = Tests()
 
-@utilt.test
-def pairwise():
+def test_pairwise():
     i = util.pairwise((1,2,3))
 
     assert i.next() == (1,2)
@@ -17,14 +15,12 @@ def pairwise():
     with raises(StopIteration):
         i.next()
 
-@utilt.test
-def onlyint():
+def test_onlyint():
     assert util.onlyint(1) == 1
     assert util.onlyint('1') == 1
     assert util.onlyint('a') == None
 
-@utilt.test
-def nextinseq():
+def test_nextinseq():
     n = util.nextinseq
 
     assert n([0, 1, 3]) == 2
@@ -33,8 +29,7 @@ def nextinseq():
     assert n([]) == 0
     assert n(['a', 'b', 'c']) == 0
 
-@utilt.test
-def iskeyvalid():
+def test_iskeyvalid():
     p = mktemp()
     sshkeyGen(p, True)
     assert util.iskeyvalid(open(p+'.pub').read())
@@ -44,13 +39,8 @@ def iskeyvalid():
 
     os.unlink(p) # big deal
 
-@utilt.test
-def listkeys64():
+def test_listkeys64():
     keys = (('a', 'zxcv', 'asdf'),)
 
     for a, b, c in util.listkeys64(keys):
         assert util.urlsafe_b64decode(b) == keys[0][1]
-
-
-if __name__ == '__main__':
-    utilt.main()

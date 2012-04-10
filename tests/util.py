@@ -4,11 +4,13 @@
 import os, shutil
 import random, string
 
-from attest import Tests, raises
+from pytest import raises, set_trace
+from mock import Mock
 
 from tempfile import mktemp, mkdtemp, NamedTemporaryFile
 from subprocess import Popen, check_call, call
 from os.path import join as pjoin, isfile, exists
+from collections import namedtuple
 
 from websshkey.gitadmin import GitAdmin
 from websshkey.gitolite import Gitolite

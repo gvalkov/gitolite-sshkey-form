@@ -3,32 +3,31 @@
 
 from tests.util import *
 
-git = Tests()
+R = namedtuple('R', ('repourl', 'workdir', 'git'))
 
-@git.context
-def createRepo():
+def pytest_funcarg__r(request):
     repourl = createGitRepo()
     workdir = mkdtemp()
     git = GitAdmin(workdir, repourl)
 
-    try:
-        yield repourl, workdir, git
-    finally:
+    def finalize():
         shutil.rmtree(repourl)
         shutil.rmtree(workdir)
 
-@git.test
-def isgit(repourl, workdir, git):
-    assert os.path.isdir('%s/.git' % workdir)
+    request.addfinalizer(finalize)
+    return R(repourl, workdir, git)
 
-@git.test
-def write(repourl, workdir, git):
+
+def test_isgit(r):
+    assert os.path.isdir('%s/.git' % r.workdir)
+
+def test_write(r):
     content = 'asdf zxcv 123'
-    git.write('file1', content)
-    git.write('files/1', content)
+    r.git.write('file1', content)
+    r.git.write('files/1', content)
 
-    fp1 = pjoin(git.repo.working_dir, 'file1')
-    fp2 = pjoin(git.repo.working_dir, 'files/1')
+    fp1 = pjoin(r.git.repo.working_dir, 'file1')
+    fp2 = pjoin(r.git.repo.working_dir, 'files/1')
 
     assert isfile(fp1)
     assert isfile(fp2)
@@ -36,39 +35,36 @@ def write(repourl, workdir, git):
     assert open(fp1).read() == content
     assert open(fp2).read() == content
 
-@git.test
-def add(repourl, workdir, git):
-    [git.write(i, 'asdf') for i in '123']
-    git.add('1', '2', '3')
+def test_add(r):
+    [r.git.write(i, 'asdf') for i in '123']
+    r.git.add('1', '2', '3')
 
-    blobs = list(git.repo.index.iter_blobs())
+    blobs = list(r.git.repo.index.iter_blobs())
     blobs = [i[1].name for i in blobs]
 
     assert sorted(blobs) == ['1', '2', '3']
 
-@git.test
-def rm(repourl, workdir, git):
-    git.write('file1', 'asdf')
-    git.rm('file1')
-    assert not exists( pjoin(git.repo.working_dir, 'file1') )
+def test_rm(r):
+    r.git.write('file1', 'asdf')
+    r.git.rm('file1')
+    assert not exists( pjoin(r.git.repo.working_dir, 'file1') )
 
-    git.write('file2', 'asdf')
-    git.add('file2')
-    git.commit('ign')
-    git.rm('file2')
+    r.git.write('file2', 'asdf')
+    r.git.add('file2')
+    r.git.commit('ign')
+    r.git.rm('file2')
 
-    assert not exists( pjoin(git.repo.working_dir, 'file2') )
+    assert not exists( pjoin(r.git.repo.working_dir, 'file2') )
 
-@git.test
-def commit(repourl, workdir, git):
-    add(repourl, workdir, git)
+def test_commit(r):
+    test_add(r)
 
     msg   = 'commit msg'
     name  = 'author'
     email = 'email'
 
-    git.commit(msg)
-    commit = git.repo.commit('HEAD')
+    r.git.commit(msg)
+    commit = r.git.repo.commit('HEAD')
 
     assert commit.message == msg
     #assert commit.author.name == name
@@ -78,7 +74,3 @@ def commit(repourl, workdir, git):
     blobs = [i.name for i in blobs]
 
     assert sorted(blobs) == ['1', '2', '3']
-
-
-if __name__ == '__main__':
-    git.main()

@@ -4,14 +4,14 @@
 import os
 
 from os.path import abspath, dirname
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Command
 
 from websshkey.version import version
 
 here = abspath(dirname(__file__))
 
 requires = ('flask', 'gitpython')
-test_requires = ('attest',)
+test_requires = ('pytest', 'mock')
 
 classifiers = [
     'Programming Language :: Python',
@@ -40,11 +40,22 @@ kw = {
     'install_requires'     : requires,
 
     'tests_require'        : test_requires,
-    'test_loader'          : 'attest:auto_reporter.test_loader',
-    'test_suite'           : 'tests.all',
+    'cmdclass'             : {},
 
     'include_package_data' : True,
     'zip_safe'             : False,
 }
 
+
+class PyTest(Command):
+    user_options = []
+    def initialize_options(self): pass
+    def finalize_options(self):   pass
+    def run(self):
+        from subprocess import call
+        errno = call(('py.test', 'tests'))
+        raise SystemExit(errno)
+
+
+kw['cmdclass']['test'] = PyTest
 setup(**kw)
