@@ -4,7 +4,6 @@
 import os, shutil
 import random, string
 
-from mock import Mock
 from attest import Tests, raises
 
 from tempfile import mktemp, mkdtemp, NamedTemporaryFile

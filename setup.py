@@ -11,7 +11,7 @@ from websshkey.version import version
 here = abspath(dirname(__file__))
 
 requires = ('flask', 'gitpython')
-test_requires = ('attest', 'mock')
+test_requires = ('attest',)
 
 classifiers = [
     'Programming Language :: Python',
