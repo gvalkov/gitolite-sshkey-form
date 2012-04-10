@@ -11,7 +11,7 @@ from websshkey.version import version
 here = abspath(dirname(__file__))
 
 requires = ('flask', 'gitpython')
-test_requires = ('attest', 'flask-attest', 'mock')
+test_requires = ('attest', 'mock')
 
 classifiers = [
     'Programming Language :: Python',
@@ -39,7 +39,7 @@ kw = {
     'packages'             : find_packages(exclude=['tests']),
     'install_requires'     : requires,
 
-    'test_requires'        : test_requires,
+    'tests_require'        : test_requires,
     'test_loader'          : 'attest:auto_reporter.test_loader',
     'test_suite'           : 'tests.all',
 
