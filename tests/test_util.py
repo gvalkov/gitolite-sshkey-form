@@ -44,3 +44,12 @@ def test_listkeys64():
 
     for a, b, c in util.listkeys64(keys):
         assert util.urlsafe_b64decode(b) == keys[0][1]
+
+def test_splitkey():
+    assert util.splitkey('joe@1.pub')  == ('joe', '1')
+    assert util.splitkey('joe@pc.pub') == ('joe', 'pc')
+    assert util.splitkey('joe.pub')    == ('joe', None)
+
+def test_joinkey():
+    assert util.joinkey('joe', 1)  == 'joe@1.pub'
+    assert util.joinkey('joe', None)  == 'joe.pub'

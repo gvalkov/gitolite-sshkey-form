@@ -3,7 +3,7 @@
 
 
 from os.path import basename, join as pjoin
-from util import nextinseq
+from util import nextinseq, splitkey, joinkey
 
 
 class Gitolite(object):
@@ -23,7 +23,7 @@ class Gitolite(object):
         tree = self.gitadm.tree(self.keydir)
 
         for key in tree.traverse():
-            act_user, machine = self._splitkey(key.name)
+            act_user, machine = splitkey(key.name)
 
             if act_user == user:
                 yield act_user, machine, None if namesonly else key.data_stream.read()
@@ -32,7 +32,7 @@ class Gitolite(object):
         nums = [i[1] for i in self.listkeys(user, True)]
         next = nextinseq(nums)
 
-        fn = pjoin(self.keydir, self._joinkey(user, next))
+        fn = pjoin(self.keydir, joinkey(user, next))
 
         try:
             self.gitadm.pull()
@@ -52,7 +52,7 @@ class Gitolite(object):
     def dropkey(self, user, machine):
         if machine == 'None': machine = None # @bug
 
-        fn = pjoin(self.keydir, self._joinkey(user, machine))
+        fn = pjoin(self.keydir, joinkey(user, machine))
 
         try:
             self.gitadm.pull()
@@ -66,33 +66,10 @@ class Gitolite(object):
         except:
             raise
 
-    def _splitkey(self, name):
-        ''' 'joe@1.pub'  -> 'joe', '1'
-            'joe@pc.pub' -> 'joe', 'pc'
-            'joe.pub'    -> 'joe', None
-        '''
-
-        name = basename(name)
-        name = name.rstrip('.pub').split('@')
-
-        if len(name) == 1:
-            return name[0], None
-        elif type(name[1]) :
-            return name[0], name[1]
-
-    def _joinkey(self, name, machine):
-        ''' 'joe', int(1) -> 'joe@1.pub'
-            'joe', None   -> 'joe.pub'
-        '''
-
-        if machine is None: return name + '.pub'
-        else:               return '%s@%s.pub' % (name, machine)
-
-
     def _keypath(self, name, machine):
         ''' return the absolute path to the user's public key '''
 
         return pjoin(self.gitadm.repo.working_dir,
                      self.keydir,
-                     self._joinkey(name, machine))
+                     joinkey(name, machine))
 

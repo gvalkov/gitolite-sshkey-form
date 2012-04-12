@@ -3,6 +3,7 @@
 
 import os
 
+from os.path    import basename
 from base64     import urlsafe_b64encode, urlsafe_b64decode
 from types      import IntType, StringType
 from itertools  import tee, izip
@@ -57,3 +58,24 @@ def listkeys64(keys):
         # joe.pub -> machine is None (which is lame)
         yield user, urlsafe_b64encode(str(machine)), key
 
+def splitkey(name):
+    ''' 'joe@1.pub'  -> 'joe', '1'
+        'joe@pc.pub' -> 'joe', 'pc'
+        'joe.pub'    -> 'joe', None
+    '''
+
+    name = basename(name)
+    name = name.rstrip('.pub').split('@')
+
+    if len(name) == 1:
+        return name[0], None
+    elif type(name[1]) :
+        return name[0], name[1]
+
+def joinkey(name, machine):
+    ''' 'joe', int(1) -> 'joe@1.pub'
+        'joe', None   -> 'joe.pub'
+    '''
+
+    if machine is None: return name + '.pub'
+    else:               return '%s@%s.pub' % (name, machine)
