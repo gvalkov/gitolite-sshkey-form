@@ -84,6 +84,10 @@ div#git-identity input {
     min-height: 1.6em;
 }
 
+div.pubkey input#load-key-file {
+    display: none;
+}
+
 div#oneline-error {
     font-weight: bold;
     color: #d46464;

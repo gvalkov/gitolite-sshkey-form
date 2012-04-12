@@ -47,7 +47,8 @@
       <p> <textarea> </textarea> </p>
       <button class='btn' id='add-key'> Add </button>
       <button class='btn' id='load-key'> Load </button>
-      <form action='add' method='post'></form>
+      <form action='add' method='post'> </form>
+      <input type='file' id='load-key-file'></input>
     </div>
 
     {% for user, machine, key in sshkeys %}

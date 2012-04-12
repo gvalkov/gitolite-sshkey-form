@@ -1,5 +1,4 @@
 $(function () {
-
     function shortError (msg) {
         $('#oneline-error span').text(msg);
         $('#oneline-error').show('highlight');
@@ -8,6 +7,11 @@ $(function () {
     function onErrorShort (xhr, error, ign) {
         shortError(xhr.responseText);
     }
+
+    function hasFileAPI() {
+        var w = window;
+        return w.File && w.FileReader && w.FileList && w.Blob
+    };
 
     $('#faq').accordion({
         active      : true,
@@ -86,6 +90,27 @@ $(function () {
             error   : onErrorShort,
         });
     });
+
+    /* Load key from file (needs html5 file API) */
+    if (hasFileAPI()) {
+        $('#load-key').click(function () {
+            $('#load-key-file').click()
+        });
+
+        $('#load-key-file').change(function (e) {
+            var f = $('#load-key-file')[0].files[0];
+            var r = new FileReader();
+
+            r.readAsText(f, 'UTF-8'); // @todo
+            r.onload = function(e) {
+                var res= e.target.result;
+                var fn = $('#load-key-file')[0].files[0].name; 
+                $('div.pubkey textarea').val(res);
+            };
+        });
+    } else {
+        $('#load-key').button('disable');
+    }
 
     /* Default textinput value */
     $('div#git-identity input').focus( function(src) {
