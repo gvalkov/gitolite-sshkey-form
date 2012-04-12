@@ -45,7 +45,7 @@ class Gitolite(object):
 
             self.logger.info(msg)
         except:
-            raise
+            raise #@todo
             try: self.gitadm.rm(fn)
             except: pass
 

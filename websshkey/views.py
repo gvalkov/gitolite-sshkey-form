@@ -8,6 +8,7 @@ from flask import request
 
 from websshkey.app  import app
 from websshkey.util import iskeyvalid, listkeys64, urlsafe_b64decode
+from websshkey.dir  import Dir
 from websshkey.gitadmin import GitAdmin
 from websshkey.gitolite import Gitolite
 from websshkey.identities import Identities
@@ -16,14 +17,17 @@ from websshkey.identities import Identities
 def repoconnect():
     kw = {
         'workdir' : app.config['WORKDIR'],
-        'repourl' : app.config['ADMIN_REPO'],
-        'branch'  : app.config['BRANCH'],
-        'author_name'  : app.config['AUTHOR_NAME'],
-        'author_email' : app.config['AUTHOR_EMAIL'],
+        'branch'  : app.config.get('BRANCH', None),
+        'repourl' : app.config.get('ADMIN_REPO', None),
+        'author_name'  : app.config.get('AUTHOR_NAME', 'Gitolite Form'),
+        'author_email' : app.config.get('AUTHOR_EMAIL', 'nobody@localhost'),
     }
 
-    repo = GitAdmin(**kw)
-    return Gitolite(repo, app.logger)
+    if kw['repourl']:
+        repo = GitAdmin(**kw)
+        return Gitolite(repo, app.logger)
+    else:
+        return Dir(kw['workdir'], app.logger)
 
 
 @app.before_first_request
@@ -37,11 +41,11 @@ def configure():
 def initialize():
     with_idn = app.config['ENABLE_IDENTITIES']
 
-    gitolite   = getattr(flask.g, 'gitoltie',   None)
+    store      = getattr(flask.g, 'store',      None)
     identities = getattr(flask.g, 'identities', None)
 
-    if not gitolite:
-        flask.g.gitolite = repoconnect()
+    if not store:
+        flask.g.store = repoconnect()
 
     if with_idn and not identities:
         sql = app.open_resource('schema.sql').read()
@@ -51,7 +55,7 @@ def initialize():
 @app.route('/')
 def index():
     remote_user = request.environ['REMOTE_USER']
-    keys = flask.g.gitolite.listkeys(remote_user)
+    keys = flask.g.store.listkeys(remote_user)
 
     # base64 encode the machine name
     keys = listkeys64(keys)
@@ -83,7 +87,7 @@ def addkey():
     if not iskeyvalid(key):
         return flask.Response('Invalid public key', status=400)
 
-    flask.g.gitolite.addkey(remote_user, key)
+    flask.g.store.addkey(remote_user, key)
     return flask.Response(status=200)
 
 
@@ -97,7 +101,7 @@ def dropkey(machine):
     # base64 decode the machine name (must not be unicode)
     machine = urlsafe_b64decode(str(machine))
 
-    flask.g.gitolite.dropkey(remote_user, machine)
+    flask.g.store.dropkey(remote_user, machine)
     return flask.Response(status=200)
 
 
