@@ -6,7 +6,7 @@ from shutil import rmtree
 from os.path import abspath, dirname,join
 
 from tests import util
-from websshkey.app import app
+from gitolite_sshkey_form.app import app
 
 config = join(abspath(dirname(__file__)), '../etc/test-config.py')
 environ['WEBSSHKEY_HELPER_CONFIG'] = config

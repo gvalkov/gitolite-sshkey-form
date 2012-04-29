@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import os
-
-from os.path import abspath, dirname
+from os.path import abspath, dirname, join as pjoin
 from setuptools import setup, find_packages, Command
-
-from websshkey.version import version
+from gitolite_sshkey_form.version import version
 
 here = abspath(dirname(__file__))
 
@@ -20,11 +17,11 @@ classifiers = [
 ]
 
 kw = {
-    'name'                 : 'web-sshkey-helper',
+    'name'                 : 'gitolite-sshkey-form',
     'version'              : version(),
 
-    'description'          : 'SSH key managent for gitolite',
-    'long_description'     : 'To be defined',
+    'description'          : 'webapp for submitting ssh public keys directly to gitolite',
+    'long_description'     : open(pjoin(here, 'README.rst')).read(),
 
     'author'               : 'Georgi Valkov',
     'author_email'         : 'georgi.t.valkov@gmail.com',

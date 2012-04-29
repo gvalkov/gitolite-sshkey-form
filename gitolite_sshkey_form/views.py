@@ -2,16 +2,15 @@
 # encoding: utf-8
 
 import flask
-import os, sys
 
 from flask import request
 
-from websshkey.app  import app
-from websshkey.util import iskeyvalid, listkeys64, urlsafe_b64decode
-from websshkey.dir  import Dir
-from websshkey.gitadmin import GitAdmin
-from websshkey.gitolite import Gitolite
-from websshkey.identities import Identities
+from gitolite_sshkey_form.app  import app
+from gitolite_sshkey_form.util import iskeyvalid, listkeys64, urlsafe_b64decode
+from gitolite_sshkey_form.dir  import Dir
+from gitolite_sshkey_form.gitadmin import GitAdmin
+from gitolite_sshkey_form.gitolite import Gitolite
+from gitolite_sshkey_form.identities import Identities
 
 
 def repoconnect():

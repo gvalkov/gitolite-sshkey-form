@@ -3,7 +3,7 @@
 
 from flask import Flask
 
-app = Flask('websshkey')
+app = Flask('gitolite_sshkey_form')
 app.debug = True
 
-import websshkey.views
+import gitolite_sshkey_form.views

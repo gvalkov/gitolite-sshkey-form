@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from websshkey import util
+from gitolite_sshkey_form import util
 from tests.util import *
 
 

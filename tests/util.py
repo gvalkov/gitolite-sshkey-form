@@ -12,8 +12,8 @@ from subprocess import Popen, check_call, call
 from os.path import join as pjoin, isfile, exists
 from collections import namedtuple
 
-from websshkey.gitadmin import GitAdmin
-from websshkey.gitolite import Gitolite
+from gitolite_sshkey_form.gitadmin import GitAdmin
+from gitolite_sshkey_form.gitolite import Gitolite
 
 devnull = open(os.devnull, 'w')
 

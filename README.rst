@@ -1,9 +1,9 @@
-Introduction
-============
+Gitolite-sshkey-form
+====================
 
-Gitolite-sshkey-form is a simple web app that allows users to submit their ssh
-public keys directly to [gitolite][gitolite]. While this can simplify public
-key distribution, an administrator still has to give users access rights
+*Gitolite-sshkey-form* is a simple web app that allows users to submit their
+ssh public keys directly to [gitolite][gitolite]. While this can simplify
+public key distribution, an administrator still has to give users access rights
 through `gitolite-admin.conf`.
 
 Gitolite-sshkey-form can also link a gitolite alias (eg. `johndoe`) to a git
@@ -13,7 +13,7 @@ with [authorization][gitolite-auth].
 
 
 Screenshots
-===========
+-----------
 
 <div style='float:left'>
 <a href='https://github.com/gvalkov/screenshots/raw/master/full/websshkey-01.png'>
@@ -29,7 +29,7 @@ Screenshots
 
 
 Simple Authentication
-=====================
+---------------------
 
 The [update.authenticate.sh][update] hook can be used to authenticate users
 that gitolite has authorized. Once a user has associated their alias (eg.
@@ -57,15 +57,19 @@ manage your git identity seperately.
 
 
 Setup
-=====
+-----
+
+In the described setup, *gitolite-sshkey-form* will run as the
+`gitolite-sshkey-form` user. This user will contain 
+
 
 1. Create webapp user 
 
         $ sudo useradd -r -m -b /var/lib/ -s /bin/bash -- gitolite-sshkey-form
+
+2. Create ssh keypair as user `gitolite-sshkey-form` 
+
         $ sudo -u gitolite-sshkey-form -i
-
-2. Create ssh keypair
-
         $ ssh-keygen -q -N ''
 
 3. Add the ssh key fingerprint of your gitolite server to ~/ssh/.known\_hosts
