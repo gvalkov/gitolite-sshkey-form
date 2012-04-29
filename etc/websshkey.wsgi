@@ -6,7 +6,7 @@ from os import environ
 environ['WEBSSHKEY_HELPER_CONFIG'] = '/var/lib/gitolite-sshkey-form/config.py'
 
 
-activate_py = '/var/lib/gitolite-sshkey-form/env/bin/activate_this.py'
+activate_py = '/var/lib/gitolite-sshkey-form/venv/bin/activate_this.py'
 execfile(activate_py, dict(__file__=activate_py))
 
 # or
@@ -15,4 +15,4 @@ execfile(activate_py, dict(__file__=activate_py))
 #site.addsitedir("/var/lib/web-sshkey-helper/env/lib/pythonX.X/site-packages")
 
 
-from websshkey.app import app as application
+from gitolite_sshkey_.app import app as application
