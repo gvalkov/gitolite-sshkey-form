@@ -5,7 +5,7 @@ import os
 import git
 import shutil
 
-from os import environ, unlink
+from os import environ
 from os.path import join as pjoin, dirname
 
 class GitError(Exception):
@@ -13,7 +13,7 @@ class GitError(Exception):
 
 class GitAdmin(object):
     def __init__(self, workdir, repourl, branch='master',
-                       author_name='Gitolite Key Form',
+                       author_name='Gitolite Publickey Form',
                        author_email='nobody@localhost',
                        overwrite=False):
 

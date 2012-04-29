@@ -18,7 +18,7 @@ def repoconnect():
         'workdir' : app.config['WORKDIR'],
         'branch'  : app.config.get('BRANCH', None),
         'repourl' : app.config.get('ADMIN_REPO', None),
-        'author_name'  : app.config.get('AUTHOR_NAME', 'Gitolite Form'),
+        'author_name'  : app.config.get('AUTHOR_NAME', 'Gitolite Publickey Form'),
         'author_email' : app.config.get('AUTHOR_EMAIL', 'nobody@localhost'),
     }
 
