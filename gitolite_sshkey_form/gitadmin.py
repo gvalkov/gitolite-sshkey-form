@@ -26,7 +26,7 @@ class GitAdmin(object):
 
         self.overwrite = overwrite
 
-        self.repo = self._setUp()
+        self.repo = self._setup()
 
     def write(self, fn, data):
         ''' Write :data to :fn relative to workding dir '''
@@ -105,7 +105,7 @@ class GitAdmin(object):
             msg = 'Could not clone remote "%s" to "%s"' % (self.repourl, self.workdir)
             raise GitError(msg)
 
-    def _remotesEqual(self, repo):
+    def _remotesequal(self, repo):
         ''' Check if repo's origin == self.repourl '''
 
         origin = [i for i in repo.remotes if i.name == 'origin'][0] # @todo
