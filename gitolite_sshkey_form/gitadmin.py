@@ -79,13 +79,13 @@ class GitAdmin(object):
         try: tree[fn]; return True
         except KeyError: return False
 
-    def _setUp(self):
+    def _setup(self):
         try:
             repo = git.Repo(self.workdir)
         except (git.NoSuchPathError, git.InvalidGitRepositoryError):
             repo = False
 
-        if repo and self._remotesEqual(repo):
+        if repo and self._remotesequal(repo):
             return repo
         else:
             return self._clone()
@@ -93,7 +93,7 @@ class GitAdmin(object):
         if os.path.exists(self.workdir):
             if not self.overwrite:
                 msg = 'Workdir is not a git repository and force=False: refusing to overwrite'
-                raise GitoliteError(msg)
+                raise GitError(msg)
             else:
                 shutil.rmtree(self.workdir)
                 return self._clone()
