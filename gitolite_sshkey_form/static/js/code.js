@@ -28,7 +28,8 @@ $(function () {
     });
 
     $('#add-key').button({
-        icons: { primary: 'icon-key' }
+        icons: { primary: 'icon-key' },
+        disabled: true
     });
 
     $('#load-key').button({
@@ -91,6 +92,15 @@ $(function () {
         });
     });
 
+    /* Enable #add-key button only if a key was entered */
+    $('div.pubkey textarea').live('keyup change', function () {
+        if (this.value.length == 0) {
+            $('#add-key').button('disable');
+        } else {
+            $('#add-key').button('enable');
+        }
+    });
+
     /* Load key from file (needs html5 file API) */
     if (hasFileAPI()) {
         $('#load-key').click(function () {
@@ -105,14 +115,14 @@ $(function () {
             r.onload = function(e) {
                 var res= e.target.result;
                 var fn = $('#load-key-file')[0].files[0].name; 
-                $('div.pubkey textarea').val(res);
+                $('div.pubkey textarea').val(res).trigger('change');
             };
         });
     } else {
         $('#load-key').button('disable');
     }
 
-    /* Default textinput value */
+    /* Default identity textinput value */
     $('div#git-identity input').focus( function(src) {
         var el = $(this);
 
