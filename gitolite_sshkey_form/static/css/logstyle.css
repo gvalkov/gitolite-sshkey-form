@@ -1,0 +1,23 @@
+body {
+    text-align:left;
+    font-family: Consolas, Menlo , Monaco , Lucida Console, Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+    font-size: 10px;
+    color: #111;
+    margin: 10px;
+}
+
+span.added, span.removed {
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+    cursor: default;
+    display: inline-block;
+    padding: 0 20px 4px;
+}
+
+span.added {
+    background-image: url("../images/sweetieplus/without-shadows/plus-16-ns.png");
+}
+
+span.removed {
+    background-image: url("../images/sweetieplus/without-shadows/minus-16-ns.png");
+}

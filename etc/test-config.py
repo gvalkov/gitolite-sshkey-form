@@ -19,3 +19,6 @@ AUTHOR_EMAIL = '<nobody@localhost>'
 # enable/disable the identity functionality
 ENABLE_IDENTITIES = True
 IDENTITIES_DB = '/tmp/websshkey-identities.sql'
+
+# show public key addition/removal log on /log
+ENABLE_LOG = True

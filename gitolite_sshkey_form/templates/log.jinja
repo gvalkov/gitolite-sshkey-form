@@ -1,0 +1,31 @@
+<html>
+
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <title id='title'>Git - Key Config - Log</title>
+
+  <!-- css -->
+  <link rel='stylesheet' href='{{ url_for('static', filename="css/reset.css") }}'>
+  <link rel='stylesheet' href='{{ url_for('static', filename="css/logstyle.css") }}'>
+</head>
+
+<body>
+  <div>
+
+  {% for date, action, text in log %}
+    <p>
+    {% if action == 0 %}
+      <span class='added'>
+    {% else %}
+      <span class='removed'>
+    {% endif %}
+      {# it ain't stupid if it works #}
+      {{ date }} &nbsp;&nbsp;&nbsp; {{ text }}</span> 
+      </span>
+    </p>
+  {% endfor %}
+
+  </div>
+</body>
+
+</html>

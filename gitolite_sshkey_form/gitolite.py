@@ -66,6 +66,20 @@ class Gitolite(object):
         except:
             raise
 
+    def log(self, days=356):
+        add_str = self.commit_msg_add.split(':', 1)[0]
+        del_str = self.commit_msg_del.split(':', 1)[0]
+
+        regex = '^[(%s)(%s)]' % (add_str, del_str)
+
+        out = self.gitadm.repo.git.log(grep=regex, pretty='%ci;%s')
+        for line in out.splitlines():
+            date, text = line.split(';')
+            if text.startswith(add_str): action=0 # add
+            else: action=1 # remove
+
+            yield date, action, text
+
     def _keypath(self, name, machine):
         ''' return the absolute path to the user's public key '''
 
