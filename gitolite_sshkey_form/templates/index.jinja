@@ -58,43 +58,42 @@
     </div>
     {% endfor %}
 
-    <div> 
+    <div>
       <span> Help </span>
-      <div id='faq'> 
+      <div id='faq'>
         <h3><a href='#'>How do I generate a ssh keypair?</a></h3>
         <div>
-          <div>
-            <span> Linux/Unix </span>
-            <hr/>
-            <pre> To be defined </pre>
-          </div>
-
-          <div>
-            <span> Windows </span>
-            <hr/>
-            <pre> To be defined </pre>
-          </div>
-
-          <div>
-            <span> Notes </span>
-            <hr/>
-            <pre> To be defined </pre>
-            <!--ul>
-                <li> To be defined </li>
-            </ul-->
-          </div>
+            <!-- cat << EOF | pygmentize -l console -f html -O noclasses=true -O style=murphy
+                 $ ssh-keygent -t rsa -C "john.doe@email"
+                 Generating public/private rsa key pair.
+                 Enter file in which to save the key (/home/john/.ssh/id_rsa):
+                 Enter passphrase (empty for no passphrase):
+                 EOF -->
+            <span>Run the following command in a terminal and answer the questions you are given:</span>
+            <pre style="line-height: 125%"><span style="color: #c65d09; font-weight: bold">$</span> ssh-keygent -t rsa -C <span style="background-color: #e0e0ff">&quot;john.doe@email&quot;</span>
+<span style="color: #808080">Generating public/private rsa key pair.</span>
+<span style="color: #808080">Enter file in which to save the key (/home/john/.ssh/id_rsa):</span>
+<span style="color: #808080">Enter passphrase (empty for no passphrase):</span>
+            </pre>
+            <span> Please refer to the following setup guides for more information:</span>
+            <ul>
+                <li> <a href="https://help.github.com/articles/generating-ssh-keys#platform-all">github</a> </li>
+                <li> <a href="http://git-scm.com/book/en/Git-on-the-Server-Generating-Your-SSH-Public-Key">gitscm</a> </li>
+            </ul>
         </div>
 
         <h3><a href='#'>How do I find my ssh public key?</a></h3>
-        <pre>To be defined</pre>
-
-        {% if enable_identities %}
-        <h3><a href='#'>What is a GIT identity?</a></h3>
-        <pre>To be defined</pre>
-        {% endif %}
+        <div>
+          <p> Your ssh public key is usually located in <tt>~/.ssh/id_rsa.pub</tt> or
+            <tt>C:\Documents and Settings\John\.ssh\id_rsa.pub</tt>.
+          </p>
+          <p> It is entirely possible to have different key pairs for different
+            hosts, in which case you should refer to the <tt>Host</tt> and <tt>IdentityFile</tt> options in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh_config">ssh_config</a>.
+          </p>
+        </div>
       </div>
     </div>
-    
+
   </div>
   </div>
 </body>
