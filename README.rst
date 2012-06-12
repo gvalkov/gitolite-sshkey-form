@@ -187,7 +187,7 @@ To run individual tests::
 
     $ py.test tests/test_$name.py
 
-** Todo **
+**Todo:**
 
  * Setting up *gitolite-sshkey-form* is currently overkill for most
    small teams that just want to quickly gather keys. A standalone
