@@ -63,7 +63,7 @@ Setup
 In the following setup, *gitolite-sshkey-form* will run as the
 ``gitolite-sshkey-form`` user. This user will have RW access to the
 ``gitolite-admin`` repository. The webapp and all its dependencies will be
-installed in a virtual environment in the user's home directory. 
+installed in a virtual environment in the user's home directory.
 
 
 1. Create and become user ``gitolite-sshkey-form``::
@@ -103,21 +103,21 @@ installed in a virtual environment in the user's home directory.
 6. Install *gitolite-sshkey-form* from pypi (stable version) or github (development)::
 
     $ ~/venv/bin/pip install gitolite-sshkey-form # stable
-    $ ~/venv/bin/pip install git+git://github.com/gvalkov/gitolite-sshkey-form # development 
+    $ ~/venv/bin/pip install git+git://github.com/gvalkov/gitolite-sshkey-form # development
 
 7. Configure gitolite-sshkey-form::
 
-    # download the annotated config file 
-    $ wget https://raw.github.com/gvalkov/gitolite-sshkey-form/blob/HEAD/etc/config.py 
+    # download the annotated config file
+    $ wget https://raw.github.com/gvalkov/gitolite-sshkey-form/blob/HEAD/etc/config.py
 
-    # and modify according to fit your environment 
-    $ editor config.py 
+    # and modify according to fit your environment
+    $ editor config.py
 
 8. Configure application server (apache + mod_wsgi)::
 
-    # download example wsgi file 
+    # download example wsgi file
     $ wget https://raw.github.com/gvalkov/gitolite-sshkey-form/HEAD/etc/websshkey.wsgi
-    $ editor websshkey.py 
+    $ editor websshkey.py
 
     # set the path to the config file:
     # environ['WEBSSHKEY_HELPER_CONFIG'] = '/var/lib/gitolite-sshkey-form/config.py'
@@ -129,7 +129,7 @@ installed in a virtual environment in the user's home directory.
 
 The httpd.conf_ file contains an example virtual host configuration running
 with mod_wsgi_. You would most certainly need to configure some sort of
-authentication (anything that sets a REMOTE_USER). 
+authentication (anything that sets a REMOTE_USER).
 
 
 Setup - Simple Authentication
@@ -168,17 +168,17 @@ Development
 
 **Random notes:**
 
- * Use the test-run.py_ script to run locally (it also set a
+ * Use the test-run.py_ script to run locally (it also sets a
    ``REMOTE_USER`` for you, since nearly all handlers rely on that being set)
 
  * The styling of the app is intertwined between the main stylesheet_ and
-   the `jquery-ui css`_. 
+   the `jquery-ui css`_.
 
 **Tests:**
- 
+
 For testing, *gitolite-sshkey-form* uses the excellent py.test_ framework.
 To install testing dependencies and run all tests::
-        
+
     $ pip install py.test
     $ py.test tests
 
@@ -191,7 +191,7 @@ License
 -------
 *Gitolite-sshkey-form* is released under the terms of the `New BSD License`_.
 
- 
+
 .. _gitolite:        http://github.com/sitaramc/gitolite
 .. _authorization:   http://sitaramc.github.com/gitolite/auth.html
 .. _update.authenticate.sh: http://github.com/gvalkov/gitolite-sshkey-form/blob/master/etc/update.authenticate.sh

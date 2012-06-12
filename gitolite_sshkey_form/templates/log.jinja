@@ -11,7 +11,6 @@
 
 <body>
   <div>
-
   {% for date, action, text in log %}
     <p>
     {% if action == 0 %}
@@ -20,11 +19,10 @@
       <span class='removed'>
     {% endif %}
       {# it ain't stupid if it works #}
-      {{ date }} &nbsp;&nbsp;&nbsp; {{ text }}</span> 
+      {{ date }} &nbsp;&nbsp;&nbsp; {{ text }}</span>
       </span>
     </p>
   {% endfor %}
-
   </div>
 </body>
 
