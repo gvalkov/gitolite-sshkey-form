@@ -15,6 +15,8 @@ classifiers = [
     'License :: OSI Approved :: BSD License',
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: CGI Tools/Libraries',
     'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
+    'Programming Language :: Python :: 2.6',
+    'Programming Language :: Python :: 2.7',
     #'Development Status :: 1 - Planning',
     #'Development Status :: 2 - Pre-Alpha',
     #'Development Status :: 3 - Alpha',
