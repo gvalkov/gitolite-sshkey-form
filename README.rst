@@ -50,11 +50,12 @@ If you wish to disable this functionality, set ``ENABLE_IDENTITIES`` to
 view.
 
 Since *gitolite-sshkey-form* needs a ``REMOTE_USER`` to be set by your
-application server, you most likely already have a better service against which
-to authenticate commits (centralized authentication). The described
-functionality might be useful if your authentication backend does not contain
-all the necessary information (full name, email) or in cases where it is easier
-to manage your git identity separately.
+application server, you most likely already have a better service
+against which commits can be authenticated (some form of centralized
+authentication). The described functionality might be useful if your
+authentication backend does not contain all the necessary information
+(full name, email) or in cases where it is easier to manage your git
+identities separately.
 
 
 Setup
@@ -185,6 +186,21 @@ To install testing dependencies and run all tests::
 To run individual tests::
 
     $ py.test tests/test_$name.py
+
+** Todo **
+
+ * Setting up *gitolite-sshkey-form* is currently overkill for most
+   small teams that just want to quickly gather keys. A standalone
+   script that serves the webapp and works without an authentication
+   backend (everybody can select whatever alias they choose) would be
+   nice.
+
+ * The templates and css ended up being a real mess. I suppose they're
+   in need of some attention (I'm not really a web developer of any
+   kind).
+
+ * Better loading/working indicator.
+
 
 
 License
