@@ -139,7 +139,7 @@ def showlog():
     if not app.config['ENABLE_LOG']:
         return flask.Response(status=404)
 
-    if not isinstance(flask.g.store, Dir):
+    if isinstance(flask.g.store, Dir):
         msg = 'log available only if ADMIN_REPO is set'
         return flask.Response(msg, status=500)
 
