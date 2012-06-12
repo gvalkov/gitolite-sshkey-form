@@ -23,6 +23,10 @@ Screenshots
    :target: https://github.com/gvalkov/screenshots/raw/master/full/websshkey-02.png
    :alt:    With two public keys
 
+.. image::  https://github.com/gvalkov/screenshots/raw/master/thumb/websshkey-03.png
+   :target: https://github.com/gvalkov/screenshots/raw/master/full/websshkey-03.png
+   :alt:    Activity log
+
 
 Simple Authentication
 ---------------------
