@@ -1,1 +1,3 @@
-recursive-include websshkey *.png *.jpg *.gif *.txt *.css  *.js *.html *.xml *.jinja *.sql
+global-include *.png *.jpg *.gif *.txt *.css  *.js *.html *.xml *.jinja *.jinja2 *.sql *.txt
+include README.rst
+include etc/*
