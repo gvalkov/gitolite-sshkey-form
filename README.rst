@@ -67,21 +67,29 @@ In the following setup, *gitolite-sshkey-form* will run as the
 installed in a virtual environment in the user's home directory.
 
 
-1. Create and become user ``gitolite-sshkey-form``::
+1. Create and become user ``gitolite-sshkey-form``:
+
+.. code-block:: bash
 
     $ sudo useradd -r -m -b /var/lib/ -s /bin/bash -- gitolite-sshkey-form
     $ sudo -u gitolite-sshkey-form -i
 
-2. Create a ssh keypair with an empty passphrase::
+2. Create a ssh keypair with an empty passphrase:
+
+.. code-block:: bash
 
     $ ssh-keygen -q -N ''
 
-3. Add the ssh key fingerprint of your gitolite server to ``~/ssh/.known_hosts``::
+3. Add the ssh key fingerprint of your gitolite server to ``~/ssh/.known_hosts``:
+
+.. code-block:: bash
 
     # simply accept the fingerprint (no need to login)
     $ ssh gitolite@git.yourdomain.com
 
-4. Give the ``gitolite-sshkey-form`` user access to the gitolite-admin repo::
+4. Give the ``gitolite-sshkey-form`` user access to the gitolite-admin repo:
+
+.. code-block:: bash
 
     # copy .ssh/id_rsa.pub to gitolite-admin/keydir/gitolite-sshkey-form.pub
 
@@ -97,16 +105,22 @@ installed in a virtual environment in the user's home directory.
     $ ssh gitolite@git.yourdomain.com info | grep gitolite-admin
         R   W     gitolite-admin
 
-5. Create a virtual environment::
+5. Create a virtual environment:
+
+.. code-block:: bash
 
     $ virtualenv --no-site-packages ~/venv
 
-6. Install *gitolite-sshkey-form* from pypi (stable version) or github (development)::
+6. Install *gitolite-sshkey-form* from pypi (stable version) or github (development):
+
+.. code-block:: bash
 
     $ ~/venv/bin/pip install gitolite-sshkey-form # stable
     $ ~/venv/bin/pip install git+git://github.com/gvalkov/gitolite-sshkey-form # development
 
-7. Configure gitolite-sshkey-form::
+7. Configure gitolite-sshkey-form:
+
+.. code-block:: bash
 
     # download the annotated config file
     $ wget https://raw.github.com/gvalkov/gitolite-sshkey-form/blob/HEAD/etc/config.py
@@ -114,7 +128,9 @@ installed in a virtual environment in the user's home directory.
     # and modify according to fit your environment
     $ editor config.py
 
-8. Configure application server (apache + mod_wsgi)::
+8. Configure application server (apache + mod_wsgi):
+
+.. code-block:: bash
 
     # download example wsgi file
     $ wget https://raw.github.com/gvalkov/gitolite-sshkey-form/HEAD/etc/websshkey.wsgi
@@ -136,7 +152,9 @@ authentication (anything that sets a REMOTE_USER).
 Setup - Simple Authentication
 -----------------------------
 
-1. Enable gitolite update hook chaining::
+1. Enable gitolite update hook chaining:
+
+.. code-block:: bash
 
     $ cd /path/to/gitolite/hooks/common
 
@@ -150,7 +168,9 @@ Gitolite will add symbolic links to ``update.secondary.d`` and
 ``update.secondary`` in the hooks directory of every repository that it
 oversees.
 
-2. Copy the update.authenticate.sh_ script to ``./update.secondary.d``::
+2. Copy the update.authenticate.sh_ script to ``./update.secondary.d``:
+
+.. code-block:: bash
 
     $ wget -P ./update.secondary.d/ http://raw.github.com/gvalkov/gitolite-sshkey-form/blob/master/etc/update.authenticate.sh
 
@@ -178,12 +198,16 @@ Development
 **Tests:**
 
 For testing, *gitolite-sshkey-form* uses the excellent py.test_ framework.
-To install testing dependencies and run all tests::
+To install testing dependencies and run all tests:
+
+.. code-block:: bash
 
     $ pip install py.test
     $ py.test tests
 
-To run individual tests::
+To run individual tests:
+
+.. code-block:: bash
 
     $ py.test tests/test_$name.py
 
