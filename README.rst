@@ -123,7 +123,7 @@ installed in a virtual environment in the user's home directory.
 .. code-block:: bash
 
     # download the annotated config file
-    $ wget https://raw.github.com/gvalkov/gitolite-sshkey-form/blob/HEAD/etc/config.py
+    $ wget https://raw.github.com/gvalkov/gitolite-sshkey-form/master/etc/config.py
 
     # and modify according to fit your environment
     $ editor config.py
