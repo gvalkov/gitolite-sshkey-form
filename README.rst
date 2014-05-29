@@ -19,13 +19,13 @@ still has to assign access rights through ``gitolite-admin.conf``.
 Screenshots
 -----------
 
-.. image::  https://github.com/gvalkov/screenshots/raw/master/thumb/websshkey-01.png
-   :target: https://github.com/gvalkov/screenshots/raw/master/full/websshkey-01.png
-   :alt:    Without any public keys
+.. image::  https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/empty-thumb.png
+   :target: https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/empty.png
+   :alt:    Without public keys
 
-.. image::  https://github.com/gvalkov/screenshots/raw/master/thumb/websshkey-02.png
-   :target: https://github.com/gvalkov/screenshots/raw/master/full/websshkey-02.png
-   :alt:    With two public keys
+.. image::  https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/with-keys-thumb.png
+   :target: https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/with-keys.png
+   :alt:    With public keys
 
 License
 -------
@@ -34,6 +34,6 @@ License
 
 .. _gitolite:        https://github.com/sitaramc/gitolite
 .. _authorization:   https://sitaramc.github.com/gitolite/auth.html
-.. _legacy:          https://github.com/gvalkov/gitolite-sshkey-form/tree/master
+.. _legacy:          https://github.com/gvalkov/gitolite-sshkey-form/tree/legacy
 
 .. _Revised BSD License: https://raw.github.com/gvalkov/gitolite-sshkey-form/master/LICENSE

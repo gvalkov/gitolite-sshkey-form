@@ -54,7 +54,7 @@
     <div>
       <span>Help</span>
       <div id='faq'>
-        <h3><a href='#'>How do I generate a ssh keypair?</a></h3>
+        <h3><a href='#'>How do I generate an ssh keypair?</a></h3>
         <div>
             <!-- cat << EOF | pygmentize -l console -f html -O noclasses=true -O style=murphy
                  $ ssh-keygent -t rsa -C "john.doe@email"
