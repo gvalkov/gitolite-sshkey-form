@@ -1,0 +1,26 @@
+# Gitolite-admin repository to clone (optional)
+# ADMIN_REPO: '<changeme>'
+
+# Location of ADMIN_REPO working copy. If ADMIN_REPO is set, the
+# webapp will clone it into WORKDIR. Adding or removing a key will
+# trigger a push to ADMIN_REPO. If ADMIN_REPO is not set (or set to
+# ''), WORKDIR is just a directory for storing keys.
+#WORKDIR: '<changeme>'
+
+# gitolite-admin branch to which keys should be pushed (optional)
+BRANCH: 'master'
+
+# author/email to use when adding keys to gitolite-admin
+AUTHOR_NAME:  'Gitolite Public Key Form'
+AUTHOR_EMAIL: '<nobody@localhost>'
+
+# Dancer config
+appname:  "gitolite_sshkey_form"
+charset:  "UTF-8"
+
+template: "template_toolkit"
+engines:
+  template:
+    template_toolkit:
+      start_tag: '<%'
+      end_tag:   '%>'

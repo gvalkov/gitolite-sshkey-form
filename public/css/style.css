@@ -1,0 +1,171 @@
+body {
+  text-align:center;
+  font-family: "Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
+  font-size: 12px;
+  color: #111;
+}
+
+pre {
+  /* font-family list taken from stackoverflow */
+  font-family: Consolas, Menlo , Monaco , Lucida Console, Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  overflow: auto;
+  padding: 5px;
+  width: auto;
+}
+
+div {
+  padding-top: 15px;
+}
+
+input, textarea {
+  -moz-box-sizing: border-box;
+  height: 150px;
+  max-height: 16px;
+  min-height: 150px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+
+  resize: none;
+
+  /* style and background taken from dojo's nihilo theme */
+  /* background: url("../images/validationInputBg.png") repeat-x scroll left top #FFFFFF; */
+  border: 1px solid #D3D3D3;
+
+  /* font-family list taken from stackoverflow */
+  font-family: Consolas, Menlo , Monaco , Lucida Console, Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  font-size: 1.1em;
+}
+
+.btn {
+  background: none;
+  border: 1px solid #D3D3D3;
+  border-top: none;
+}
+
+span.icon-attention {
+  font-size: 1.2em;
+}
+
+.btn span.icon-plus,
+.btn span.icon-cancel,
+.btn span.icon-folder-open-empty  {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: -5px;
+  font-size: 1.0em;
+}
+
+.ui-button-text-only .ui-button-text,
+.ui-button-text-icon-primary .ui-button-text,
+.ui-button-text-icons .ui-button-text {
+  padding-left: 2px;
+  margin-left: 2px;
+}
+
+.centered {
+  width:500px;
+  margin:0px auto;
+  text-align:left;
+  padding:15px;
+  border:0px solid #333;
+}
+
+.content {
+  padding: 50px 0px;
+  line-height: 22px;
+}
+
+
+div#loading {
+  text-align: left;
+  height: auto;
+}
+
+div#loading div {
+  padding: 2px;
+}
+
+div#git-identity input {
+  max-height: 1.6em;
+  min-height: 1.6em;
+}
+
+div.pubkey input#load-key-file {
+  display: none;
+}
+
+div#oneline-error {
+  font-weight: bold;
+  color: #93221A;
+  /*text-decoration: underline;*/
+  padding: 0;
+  text-align:center;
+  display: none;
+}
+
+div#oneline-error img {
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+.centered-within {
+  text-align: center;
+  font-style: bold;
+  padding-bottom:10px;
+}
+
+.text-area-inactive {
+  color: #a1a1a1;
+  font-style: italic;
+}
+
+/*Customize the look of the faq accorion */
+#faq > .ui-state-default,.ui-state-active,.ui-widget-content {
+  border: 0px;
+}
+
+#faq > .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+  color: #243C5F;
+}
+
+#faq > .ui-widget {
+  font-size: 12px;
+}
+
+#faq pre {
+  line-height: 125%
+}
+
+#faq ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+#faq ul li:before {
+  content: "\00BB \0020";
+  color: #d46464;
+}
+
+.ui-accordion .ui-accordion-header {
+  padding-left: 8px;
+}
+
+.ui-accordion .ui-accordion-content {
+  padding: 5px;
+}
+
+/* jquery.loading style */
+.loading {
+  background: #D3D3D3;
+  padding-left: 3px;
+  border: 2px;
+}
+
+.loading-masked { overflow: hidden; }
+.loading-error {
+  color: #FFF;
+  background: red;
+}
