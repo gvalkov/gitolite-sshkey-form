@@ -27,6 +27,30 @@ Screenshots
    :target: https://github.com/gvalkov/gitolite-sshkey-form/raw/master/.screenshots/with-keys.png
    :alt:    With public keys
 
+Usage
+-----
+
+1. Follow `these instructions <http://search.cpan.org/~miyagawa/App-cpanminus-1.7023/lib/App/cpanminus.pm#INSTALLATION>`_ to install cpanminus_.
+
+2. Clone and install dependencies:
+
+   .. code-block:: bash
+
+       $ git clone https://github.com/gvalkov/gitolite-sshkey-form
+       $ cd gitolite-sshkey-form
+       $ cpanm --installdeps .
+
+3. Edit the ``config.yml`` file to suit your needs.
+
+4. Run with ``plackup``:
+
+   .. code-block:: bash
+
+       $ plackup --host 127.0.0.1 --port 8080 bin/app.psgi
+
+   For more deployment options, refer to ``plackup --help`` and the
+   Dancer2_ documentation.
+
 License
 -------
 
@@ -35,5 +59,7 @@ License
 .. _gitolite:        https://github.com/sitaramc/gitolite
 .. _authorization:   https://sitaramc.github.com/gitolite/auth.html
 .. _legacy:          https://github.com/gvalkov/gitolite-sshkey-form/tree/legacy
+.. _cpanminus:       http://search.cpan.org/~miyagawa/App-cpanminus-1.7023
+.. _Dancer2:         http://search.cpan.org/~sukria/Dancer2-0.01/lib/Dancer2/Deployment.pod
 
 .. _Revised BSD License: https://raw.github.com/gvalkov/gitolite-sshkey-form/master/LICENSE
