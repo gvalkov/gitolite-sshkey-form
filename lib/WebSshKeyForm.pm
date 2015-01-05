@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+package WebSshKeyForm;
 
 use v5.12;
 use strict;
@@ -9,14 +9,16 @@ use MIME::Base64::URLSafe;
 use Dancer2;
 use Template;
 
-use lib './lib';
 use Util;
 use Dir;
 use Gitolite;
 
-
+#-----------------------------------------------------------------------------
 our $VERSION = "1.0";
 
+#-----------------------------------------------------------------------------
+# Configuration.
+#-----------------------------------------------------------------------------
 my $author_name       = config->{AUTHOR_NAME}  //= q{Gitolite Publickey Form};
 my $author_email      = config->{AUTHOR_EMAIL} //= q{nobody@localhost};
 my $admin_repo_url    = config->{ADMIN_REPO}   //= "";
@@ -32,6 +34,9 @@ if ($admin_repo_url) {
     $repo = Dir->new($workdir);
 }
 
+#-----------------------------------------------------------------------------
+# Routes.
+#-----------------------------------------------------------------------------
 get '/' => sub {
     my $remote_user = request->user // 'joe';
     my @keys = $repo->listkeys($remote_user);
@@ -49,10 +54,12 @@ get '/' => sub {
     template 'index.tt' => \%ctx, {layout => undef};
 };
 
+#-----------------------------------------------------------------------------
 get '/log' => sub {
     return "";
 };
 
+#-----------------------------------------------------------------------------
 post '/add' => sub {
     my $remote_user = request->user // 'joe';
     my $data = params->{'data'};
@@ -78,6 +85,7 @@ post '/add' => sub {
     return;
 };
 
+#-----------------------------------------------------------------------------
 post '/drop/:machine' => sub {
     my $remote_user = request->user // 'joe';
 
@@ -88,12 +96,16 @@ post '/drop/:machine' => sub {
     return;
 };
 
+#-----------------------------------------------------------------------------
 post '/set-identity' => sub {
     return "";
 };
 
+#-----------------------------------------------------------------------------
 any ['get', 'post'] => '/get-identity/:alias' => sub {
     return "";
 };
 
-dance;
+#-----------------------------------------------------------------------------
+#dance;
+1;

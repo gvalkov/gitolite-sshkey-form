@@ -10,7 +10,7 @@ $eumm_version =~ s/_//;
 WriteMakefile(
     NAME                => 'gitolite_sshkey_form',
     AUTHOR              => q{Georgi Valkov <georgi.t.valkov@gmail.com>},
-    VERSION_FROM        => 'webapp.pl',
+    VERSION_FROM        => 'lib/WebSshKeyForm.pm',
     ABSTRACT            => 'Webapp for submitting ssh public keys to gitolite',
     ($eumm_version >= 6.3001
       ? ('LICENSE'=> 'perl')
@@ -22,6 +22,7 @@ WriteMakefile(
         'YAML'                  => 0.90,
         'Dancer2'               => 0.14,
         'Git::Repository'       => 1.311,
+		'File::Slurp'			=> 9999.19,
         'Try::Tiny'             => 0.22,
         'IPC::System::Simple'   => 1.25,
         'MIME::Base64::URLSafe' => 0,

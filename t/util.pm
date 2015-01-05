@@ -2,8 +2,6 @@ use v5.12;
 use strict;
 use warnings;
 
-use File::Slurp;
-
 sub sshkeygen {
     my $path = shift;
     my $real = shift // 1;
@@ -19,7 +17,7 @@ sub sshkeygen {
         say $fh join('', map {@chars[rand @chars]} 1..shift);
         close $fh;
     }
-    
+
     return read_file($path . '.pub');
 }
 

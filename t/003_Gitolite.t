@@ -2,9 +2,11 @@ use v5.12;
 use strict;
 use warnings;
 
-use Test::More tests => 3;
+use Test::More tests => 5;
 use File::Slurp;
 use File::Temp qw(tempfile tempdir);
+
+use lib './t';
 use util qw(sshkeygen);
 
 use_ok 'Gitolite';
