@@ -20,7 +20,8 @@ classifiers = [
 ]
 
 requirements = [
-    'Flask==0.10.1',
+    'Flask>=0.10.1',
+    'sh>=1.11',
 ]
 
 kw = {

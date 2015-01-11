@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
 
-import os
+import os, sys
 import base64
 
 from os.path import basename
@@ -8,12 +8,17 @@ from itertools import tee
 from subprocess import call
 from tempfile import NamedTemporaryFile
 
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
+
 
 def pairwise(iterable):
     "s -> (s0,s1), (s1,s2), (s2, s3), ..."
     a, b = tee(iterable)
     next(b, None)
-    return zip(a, b)
+    return izip(a, b)
 
 def toint(data):
     if isinstance(data, int):
@@ -23,7 +28,7 @@ def toint(data):
         if data.isdigit():
             return int(data)
 
-def nextinseq(*seq, start=0):
+def nextinseq(seq=tuple(), start=0):
     '''Return next number in sequence. For example::
        [0, 1, 3] -> 2
        [0, 'asdf', '3', 5] -> 1

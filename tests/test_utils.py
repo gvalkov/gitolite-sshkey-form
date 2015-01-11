@@ -28,12 +28,12 @@ def test_nextinseq():
     n = utils.nextinseq
 
     assert n() == 0
-    assert n(0, 1, 2) == 3
-    assert n(0, 1, 3) == 2
-    assert n(0, 'asdf', 3, 5) == 1
-    assert n(0, 1, 'asdf', 2, '3', 5) == 4
-    assert n('asdf', '3') == 4
-    assert n('a', 'b', 'c') == 0
+    assert n([0, 1, 2]) == 3
+    assert n([0, 1, 3]) == 2
+    assert n([0, 'asdf', 3, 5]) == 1
+    assert n([0, 1, 'asdf', 2, '3', 5]) == 4
+    assert n(['asdf', '3']) == 4
+    assert n(['a', 'b', 'c']) == 0
 
 def test_iskeyvalid(tmpdir):
     tmpdir = Path(str(tmpdir))
@@ -47,7 +47,8 @@ def test_listkeys64():
     keys = [('a', 'zxcv', 'asdf')]
 
     for a, b, c in utils.listkeys64(keys):
-        assert base64.urlsafe_b64decode(b).decode('utf8') == keys[0][1]
+        b64 = base64.urlsafe_b64decode(b.encode('utf8'))
+        assert b64.decode('utf8') == keys[0][1]
 
 def test_splitkey():
     assert utils.splitkey('joe@1.pub')  == ('joe', '1')

@@ -14,6 +14,6 @@ def sshkeygen(path, real=False, bits=768):
     else:
         s = random.sample(string.ascii_letters, 50)
         with path.with_suffix('.pub').open('w') as fh:
-            fh.write(''.join(s))
+            fh.write(''.join(s).decode('utf8'))
 
     return path.with_suffix('.pub').open().read()
