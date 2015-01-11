@@ -13,7 +13,7 @@ def sshkeygen(path, real=False, bits=768):
         sub.check_call(cmd, stdout=devnull, stderr=devnull)
     else:
         s = random.sample(string.ascii_letters, 50)
-        with path.with_suffix('.pub').open('w') as fh:
-            fh.write(''.join(s).decode('utf8'))
+        with path.with_suffix('.pub').open('wb') as fh:
+            fh.write(''.join(s).encode('utf8'))
 
     return path.with_suffix('.pub').open().read()

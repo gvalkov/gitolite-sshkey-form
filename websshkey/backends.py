@@ -73,8 +73,8 @@ class Directory(Backend):
         nextnum = utils.nextinseq(nums)
 
         keyname = utils.joinkey(user, nextnum)
-        with (self.workdir / keyname).open('w') as fh:
-            fh.write(data.decode('utf8'))
+        with (self.workdir / keyname).open('wb') as fh:
+            fh.write(data.encode('utf8'))
             return fh.name
 
     def dropkey(self, user, machine):
@@ -87,8 +87,8 @@ class Directory(Backend):
 
 #-----------------------------------------------------------------------------
 class Gitolite(Backend):
-    commit_msg_add = 'Added public key: user "{user}", fn "{path}"'
-    commit_msg_del = 'Removed public key: user "{user}", fn "{path}"'
+    commit_msg_add = 'Added public key: user "{}", fn "{}"'
+    commit_msg_del = 'Removed public key: user "{}", fn "{}"'
 
     def __init__(self, workdir, url, author, gitcmd='git'):
         self.workdir = workdir
@@ -136,8 +136,8 @@ class Gitolite(Backend):
         self.git('fetch', 'origin')
         self.git('reset', '--hard', 'origin/HEAD')
 
-        with path.open('w') as fh:
-            fh.write(data.decode('utf8'))
+        with path.open('wb') as fh:
+            fh.write(data.encode('utf8'))
 
         self.git('add', relpath)
         self.git('commit', relpath,
