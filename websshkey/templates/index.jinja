@@ -4,10 +4,10 @@
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <title id='title'>Git - Key Config</title>
 
-  <link rel='stylesheet' href='{{ url_for("static", filename="css/cssreset.min.css") }}'>
-  <link rel='stylesheet' href='{{ url_for("static", filename="css/jquery-ui.min.css") }}'>
+  <link rel='stylesheet' href='{{ url_for("static", filename="vendor/normalize.css") }}'>
+  <link rel='stylesheet' href='{{ url_for("static", filename="vendor/jquery-ui.min.css") }}'>
   <link rel='stylesheet' href='{{ url_for("static", filename="fonts/css/fontello.css") }}'>
-  <link rel='stylesheet' href='{{ url_for("static", filename="css/style.css") }}'>
+  <link rel='stylesheet' href='{{ url_for("static", filename="style.css") }}'>
 </head>
 
 <body>
@@ -23,6 +23,7 @@
       <span class='icon-attention'></span>
     </div>
 
+    <!------------------------------------------------------------------------------>
     {% if enable_identities %}
     <div id='git-identity'>
       <p> Type in your identity: </p>
@@ -30,27 +31,33 @@
       <button class='btn'> Update </button>
     </div>
     {% endif %}
+    <!------------------------------------------------------------------------------>
 
+    <!------------------------------------------------------------------------------>
     <div class='pubkey'>
-      <p> Type in your ssh public key: </p>
-      <p> <textarea> </textarea> </p>
+      <div>Type in your ssh public key:</div>
+      <div><textarea></textarea></div>
       <button class='btn' id='add-key'> <span class='icon-plus'></span>Add</button>
       <button class='btn' id='load-key'><span class='icon-folder-open-empty'></span> Load </button>
       <form action='add' method='post'> </form>
       <input type='file' id='load-key-file'></input>
     </div>
+    <!------------------------------------------------------------------------------>
 
+    <!------------------------------------------------------------------------------>
     {% for key in sshkeys %}
     <div class='drop-key' data-machine='{{ key[1] }}'>
       {% if loop.first %}
-      <p> Your current ssh public keys: </p>
+      <div>Your current ssh public keys:</div>
       {% endif %}
-      <p> <textarea readonly='true'>{{ key[2] }}</textarea> </p>
+      <div><textarea readonly='true'>{{ key[2] }}</textarea></div>
       <button class='btn'><span class='icon-cancel'></span>Drop</button>
     </div>
     {% endfor %}
+    <!------------------------------------------------------------------------------>
 
-    <div>
+    <!------------------------------------------------------------------------------>
+    <div id='faq-parent'>
       <span>Help</span>
       <div id='faq'>
         <h3><a href='#'>How do I generate an ssh keypair?</a></h3>
@@ -86,13 +93,14 @@
         </div>
       </div>
     </div>
+    <!------------------------------------------------------------------------------>
 
   </div>
   </div>
 
-  <script type='text/javascript' src='{{ url_for("static", filename="js/jquery-2.1.3.min.js") }}'></script>
-  <script type='text/javascript' src='{{ url_for("static", filename="js/jquery-ui-1.11.2.min.js") }}'></script>
-  <script type='text/javascript' src='{{ url_for("static", filename="js/code.js") }}'></script>
+  <script type='text/javascript' src='{{ url_for("static", filename="vendor/jquery-2.1.3.min.js") }}'></script>
+  <script type='text/javascript' src='{{ url_for("static", filename="vendor/jquery-ui-1.11.2.min.js") }}'></script>
+  <script type='text/javascript' src='{{ url_for("static", filename="code.js") }}'></script>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
+//----------------------------------------------------------------------------
 // Utility functions
+//----------------------------------------------------------------------------
 function shortError(msg) {
   $('#oneline-error span').text(msg);
   $('#oneline-error').show();
@@ -16,7 +18,9 @@ function hasFileAPI() {
 };
 
 
+//----------------------------------------------------------------------------
 // UI elements
+//----------------------------------------------------------------------------
 $('#add-key').button({disabled: true});
 $('#load-key').button();
 $('div#git-identity button').button();
@@ -28,9 +32,8 @@ $('#faq').accordion({
   collapsible: true,
 });
 
-
-// UI actions
-/* Load key from file (needs html5 file API) */
+//----------------------------------------------------------------------------
+// Enable the load-key button only if the html5 file api is available.
 if (hasFileAPI()) {
   $('#load-key').click(function () {
     $('#load-key-file').click()
@@ -51,15 +54,13 @@ if (hasFileAPI()) {
   $('#load-key').button('disable');
 }
 
-// $('div#loading').loading({
-//   text   : 'Waiting...',
-//   pulse  : 'ellipsis',
-//   delay  : 50,
-//   onAjax : true
-// });
 
+//----------------------------------------------------------------------------
+// UI actions
+//----------------------------------------------------------------------------
 
-// /* Dropping a key */
+//----------------------------------------------------------------------------
+// Drop a key.
 $('div.drop-key button').each( function(index, value) {
   $(value).button({
     icons: { primary: 'icon-delete' }
@@ -81,7 +82,8 @@ $('div.drop-key button').each( function(index, value) {
   });
 });
 
-// /* Updating an identity */
+//----------------------------------------------------------------------------
+// Update an identity.
 // $('div#git-identity button').click(function () {
 //   var identity = $.trim( $('div#git-identity input').val() );
 
@@ -93,7 +95,8 @@ $('div.drop-key button').each( function(index, value) {
 //   });
 // });
 
-/* Adding a key */
+//----------------------------------------------------------------------------
+// Add a key.
 $('#add-key').click(function () {
   var key = $.trim( $('div.pubkey textarea').val());
 
@@ -108,7 +111,8 @@ $('#add-key').click(function () {
   });
 });
 
-// Enable the #add-key button only if its input field is not empty
+//----------------------------------------------------------------------------
+// Enable the #add-key button only if its input field is not empty.
 $('div.pubkey textarea').on('keyup change', function () {
   if (this.value.length == 0) {
     $('#add-key').button('disable');

@@ -1,3 +1,6 @@
+/*---------------------------------------------------------------------------*/
+/* Top-level styles.
+/*---------------------------------------------------------------------------*/
 body {
   text-align:center;
   font-family: "Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
@@ -14,7 +17,7 @@ pre {
 }
 
 div {
-  padding-top: 15px;
+  padding-top: 2px;
 }
 
 input, textarea {
@@ -47,6 +50,9 @@ span.icon-attention {
   font-size: 1.2em;
 }
 
+/*---------------------------------------------------------------------------*/
+/* Jquery-ui overwrites.
+/*---------------------------------------------------------------------------*/
 .btn span.icon-plus,
 .btn span.icon-cancel,
 .btn span.icon-folder-open-empty  {
@@ -63,6 +69,9 @@ span.icon-attention {
   margin-left: 2px;
 }
 
+/*---------------------------------------------------------------------------*/
+/* Own styles.
+/*---------------------------------------------------------------------------*/
 .centered {
   width:500px;
   margin:0px auto;
@@ -73,9 +82,8 @@ span.icon-attention {
 
 .content {
   padding: 50px 0px;
-  line-height: 22px;
+  line-height: 15px;
 }
-
 
 div#loading {
   text-align: left;
@@ -120,7 +128,13 @@ div#oneline-error img {
   font-style: italic;
 }
 
-/*Customize the look of the faq accorion */
+/*---------------------------------------------------------------------------*/
+/* FAQ Accordion widget.
+/*---------------------------------------------------------------------------*/
+#faq-parent {
+  padding-top: 15px;
+}
+
 #faq > .ui-state-default,.ui-state-active,.ui-widget-content {
   border: 0px;
 }
