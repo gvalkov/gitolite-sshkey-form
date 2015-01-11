@@ -67,6 +67,9 @@ def addkey():
     if not utils.iskeyvalid(key):
         return flask.Response('Invalid public key', status=400)
 
+    if repo.keyexists(remote_user, key):
+        return flask.Response(status=200)
+
     log.info('adding public key for user: %s', remote_user)
     repo.addkey(remote_user, key)
     return flask.Response(status=200)
@@ -79,7 +82,7 @@ def dropkey(machine):
     if not machine:
         return flask.Response('Missing key name', status=400)
 
-    # base64 decode the machine name (must not be unicode)
+    # Base64 decode the machine name (must not be unicode).
     machine = base64.urlsafe_b64decode(str(machine)).decode('utf8')
 
     log.info('removing public key for user: %s', remote_user)
