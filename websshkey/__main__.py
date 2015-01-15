@@ -7,6 +7,7 @@ from __future__ import print_function
 import os, sys
 from optparse import OptionParser
 from websshkey.views import app
+from websshkey import __version__
 
 
 #-----------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Options:
   -b, --bind <addr:port>      listen on the specified address and port
   -r, --relative-root <path>  webapp root path (default: /)
   -c, --config-file <path>    read options from config file (optional)
+  -t, --test-user <user>      hardcode REMOTE_USER (useful for testing)
 
 Webapp Options:
   -a, --admin-repo <url>
@@ -37,7 +39,7 @@ Webapp Options:
   If '--admin-repo' is not set (or set to ''), '--workdir' will be
   treated as a plain directory in which public keys are stored.
 
-  -b, --branch <name>
+  -n, --branch <name>
 
   The gitolite-admin branch to which keys should be pushed.
   Defaults to 'master'.
@@ -60,9 +62,6 @@ Example Config File:
   AUTHOR_EMAIL = '<nobody@localhost>'\
 '''
 
-def parseopts(args=sys.argv):
-    parser = OptionParser
-
 #-----------------------------------------------------------------------------
 # Middlewares
 #-----------------------------------------------------------------------------
@@ -84,7 +83,65 @@ class TestUserMiddleware:
         environ['REMOTE_USER'] = self.remote_user
         return self.app(environ, start_response)
 
-app.wsgi_app = TestUserMiddleware(app.wsgi_app)
-app.wsgi_app = RemoteUserMiddleware(app.wsgi_app)
+#-----------------------------------------------------------------------------
+def parseopts(args=sys.argv[1:]):
+    parser = OptionParser(usage=usage, add_help_option=False)
+    o = parser.add_option
+    o('-h', '--help', action='store_true')
+    o('-d', '--debug', action='store_true')
+    o('-v', '--version', action='store_true')
+    o('-b', '--bind', default='localhost:8000')
+    o('-r', '--relative-root')
+    o('-t', '--test-user')
+    o('-c', '--config-file')
+    o('-a', '--admin-repo')
+    o('-w', '--workdir')
+    o('-n', '--branch')
+    o('-u', '--author-name')
+    o('-e', '--author-email')
 
-print(usage)
+    opts, args = parser.parse_args(args)
+    return opts, args
+
+def parseaddr(arg):
+    tmp = arg.split(':')
+    port = int(tmp[-1])
+    addr = ''.join(tmp[:-1])
+    addr = '' if addr == '*' else addr
+    return port, addr
+
+#-----------------------------------------------------------------------------
+def main(args=sys.argv):
+    opts, args = parseopts(args[1:])
+
+    if opts.help:
+        print(usage)
+        sys.exit(0)
+
+    if opts.version:
+        print('web-sshkey-helper version %s' % __version__)
+        sys.exit(0)
+
+    if not opts.config_file:
+        class config:
+            ADMIN_REPO = opts.admin_repo
+            WORKDIR = opts.workdir
+            BRANCH  = opts.branch
+            AUTHOR_NAME = opts.author_name
+            AUTHOR_EMAIL = opts.author_email
+        app.config.from_object(config)
+    else:
+        app.config.from_pyfile(opts.config_file)
+
+    port, addr = parseaddr(opts.bind)
+
+    if opts.test_user:
+        app.wsgi_app = TestUserMiddleware(app.wsgi_app, opts.test_user)
+    app.wsgi_app = RemoteUserMiddleware(app.wsgi_app)
+
+    app.run(host=addr, port=port, debug=opts.debug)
+
+if __name__ == '__main__':
+    main()
+else:
+    app.wsgi_app = RemoteUserMiddleware(app.wsgi_app)
