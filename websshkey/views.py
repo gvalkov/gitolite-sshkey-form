@@ -16,29 +16,40 @@ from websshkey import utils
 log = logging.getLogger()
 app = flask.Flask(__name__)
 
-#-----------------------------------------------------------------------------
-# Read config from environment
-#-----------------------------------------------------------------------------
-config = app.config.get
-author_name       = config('AUTHOR_NAME', 'Gitolite Publickey Form')
-author_email      = config('AUTHOR_EMAIL' 'nobody@localhost')
-admin_repo_url    = config('ADMIN_REPO', '')
-admin_repo_branch = config('BRANCH', 'master')
-workdir           = config('WORKDIR')
 
-if not workdir:
-    print('Please set the WORKDIR configuration key', file=sys.stderr)
-    sys.exit(1)
 
 #-----------------------------------------------------------------------------
-repo = None
-if admin_repo_url:
-    repo = backends.Gitolite(
-        workdir, admin_repo_url,
-        '%s <%s>' % (author_name, author_email)
-    )
-else:
-    repo = backends.Directory(workdir)
+def configure():
+    #-------------------------------------------------------------------------
+    # Read config from environment
+    #-------------------------------------------------------------------------
+    config = app.config.get
+    author_name       = config('AUTHOR_NAME', 'Gitolite Publickey Form')
+    author_email      = config('AUTHOR_EMAIL' 'nobody@localhost')
+    admin_repo_url    = config('ADMIN_REPO', '')
+    admin_repo_branch = config('BRANCH', 'master')
+    workdir           = config('WORKDIR')
+
+    if not workdir:
+        print('The WORKDIR config key is not set.', file=sys.stderr)
+        sys.exit(1)
+
+    #-------------------------------------------------------------------------
+    if admin_repo_url:
+        author = '%s <%s>' % (author_name, author_email)
+        repo = backends.Gitolite(workdir, admin_repo_url, author)
+    else:
+        repo = backends.Directory(workdir)
+
+    del config
+    globals().update(locals())
+
+@app.before_first_request
+def flask_configure():
+    try:
+        configure()
+    except SystemExit:
+        raise flask.abort(500)
 
 #-----------------------------------------------------------------------------
 @app.before_request

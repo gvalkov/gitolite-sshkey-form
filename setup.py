@@ -41,7 +41,7 @@ kw = {
     'zip_safe': False,
     'entry_points': {
         'console_scripts': [
-            'websshkey = websshkey.main:main'
+            'websshkey = websshkey.__main__:main'
         ]
     },
 }

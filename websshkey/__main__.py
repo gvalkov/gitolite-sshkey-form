@@ -6,7 +6,7 @@ from __future__ import print_function
 
 import os, sys
 from optparse import OptionParser
-from websshkey.views import app
+from websshkey.views import app, configure
 from websshkey import __version__
 
 
@@ -139,9 +139,9 @@ def main(args=sys.argv):
         app.wsgi_app = TestUserMiddleware(app.wsgi_app, opts.test_user)
     app.wsgi_app = RemoteUserMiddleware(app.wsgi_app)
 
+    configure()
     app.run(host=addr, port=port, debug=opts.debug)
+
 
 if __name__ == '__main__':
     main()
-else:
-    app.wsgi_app = RemoteUserMiddleware(app.wsgi_app)
