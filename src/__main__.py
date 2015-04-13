@@ -6,8 +6,9 @@ from __future__ import print_function
 
 import os, sys
 from optparse import OptionParser
-from websshkey.views import app, configure
-from websshkey import __version__
+
+from . views import app, configure
+from . import __version__
 
 
 #-----------------------------------------------------------------------------

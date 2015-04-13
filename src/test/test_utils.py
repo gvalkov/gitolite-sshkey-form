@@ -1,12 +1,15 @@
 # encoding: utf-8
 
+from __future__ import absolute_import
+from __future__ import print_function
+
 import os
 import pytest
 import base64
 from pathlib import Path
 
-from websshkey import utils
-from utils import sshkeygen
+from .. import utils
+from .  utils import sshkeygen
 
 
 def test_pairwise():

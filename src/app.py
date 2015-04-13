@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
-from websshkey.views import app, configure
-from websshkey.__main__ import RemoteUserMiddleware, TestUserMiddleware
+from . views import app, configure
+from . __main__ import RemoteUserMiddleware, TestUserMiddleware
 
 
 #-----------------------------------------------------------------------------

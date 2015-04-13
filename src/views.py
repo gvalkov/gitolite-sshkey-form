@@ -9,8 +9,8 @@ import flask
 import base64
 import logging
 
-from websshkey import backends
-from websshkey import utils
+from . import backends
+from . import utils
 
 #-----------------------------------------------------------------------------
 log = logging.getLogger()

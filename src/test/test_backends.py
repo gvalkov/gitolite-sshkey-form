@@ -1,5 +1,8 @@
 # -*- coding: utf-8; -*-
 
+from __future__ import absolute_import
+from __future__ import print_function
+
 import os
 import pytest
 import logging
@@ -7,8 +10,8 @@ import logging
 from pathlib import Path
 from sh import mkdir, touch, git
 
-from websshkey.backends import Directory, Gitolite
-from utils import sshkeygen
+from .. backends import Directory, Gitolite
+from .  utils import sshkeygen
 
 # stream = logging.StreamHandler()
 # stream.setLevel(logging.INFO)
