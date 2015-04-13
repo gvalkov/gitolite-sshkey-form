@@ -137,7 +137,8 @@ def main(args=sys.argv):
 
     if opts.test_user:
         app.wsgi_app = TestUserMiddleware(app.wsgi_app, opts.test_user)
-    app.wsgi_app = RemoteUserMiddleware(app.wsgi_app)
+    else:
+        app.wsgi_app = RemoteUserMiddleware(app.wsgi_app)
 
     configure()
     app.run(host=addr, port=port, debug=opts.debug)

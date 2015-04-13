@@ -31,6 +31,13 @@ License
 This project is released under the terms of the `Revised BSD License`_.
 
 .. _gitolite:        https://github.com/sitaramc/gitolite
-.. _authorization:   https://sitaramc.github.com/gitolite/auth.html
+.. _authorization:   http://gitolite.com/gitolite/concepts.html#auth
 .. _legacy:          https://github.com/gvalkov/gitolite-sshkey-form/tree/legacy
 .. _Revised BSD License: https://raw.github.com/gvalkov/gitolite-sshkey-form/master/LICENSE
+
+
+Legacy
+------
+
+If you are looking for the Perl/Dancer version of this project, please
+have a look at the legacy_ branch.
