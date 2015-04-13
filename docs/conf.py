@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import sys, os
+import sys, os, re
 import alabaster
 
 
@@ -35,9 +35,6 @@ master_doc = 'index'
 
 project = u'gitolite-sshkey-form'
 copyright = u'2012-2015, Georgi Valkov'
-
-release = kw['version']
-version = release
 
 exclude_patterns = ['_build']
 

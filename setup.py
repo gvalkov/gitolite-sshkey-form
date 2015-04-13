@@ -23,7 +23,7 @@ requirements = [
 
 entry_points = {
     'console_scripts': [
-        'gitolite_sshkey_form = gitolite_sshkey_form.__main__:main'
+        'gitolite_sshkey_form = src.__main__:main'
     ]
 }
 
